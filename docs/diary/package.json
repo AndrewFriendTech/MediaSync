@@ -1,0 +1,16 @@
+{
+  "name": "diary",
+  "version": "1.0.0",
+  "description": "Diary utility for the application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "json-beautify": "^1.1.1",
+    "tiny-cli-editor": "^0.1.1"
+  },
+  "type": "module"
+}
