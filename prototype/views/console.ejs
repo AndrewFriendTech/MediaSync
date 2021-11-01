@@ -7,6 +7,16 @@
     <title>MediaSync Console</title>
 </head>
 <body>
-    ejs
+    <% const prefix = addresses.ssl?"https://":"http://" %>
+    <% const externalV4Address = prefix + addresses.v4External} + "/"; %> 
+    <% const internalV4Address = prefix + addresses.v4Internal + "/"; %>    
+    <% const domain = prefix + addresses.domain + "/" %> 
+    <select id="address-selector">
+       <option value = "<%=  %>" > External IP Address (<%= externalV4Address %> )</option>
+
+    </select>
+    <script>
+        
+    </script>
 </body>
 </html>
