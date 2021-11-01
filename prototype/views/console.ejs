@@ -8,15 +8,35 @@
 </head>
 <body>
     <% const prefix = addresses.ssl?"https://":"http://" %>
-    <% const externalV4Address = prefix + addresses.v4External} + "/"; %> 
+    <% const externalV4Address = prefix + addresses.v4External + "/"; %> 
     <% const internalV4Address = prefix + addresses.v4Internal + "/"; %>    
     <% const domain = prefix + addresses.domain + "/" %> 
-    <select id="address-selector">
-       <option value = "<%=  %>" > External IP Address (<%= externalV4Address %> )</option>
-
+    
+    <label for="address-selector">Select address to be used for link:</label>
+    <select id="address-selector" name="address-selector">
+       <option value = "<%- externalV4Address %>" default > Public IP Address (<%= externalV4Address %> )</option>
+       <option value = "<%- internalV4Address %>" > Local IP Address (<%= internalV4Address %> )</option>
+       <option value = "<%- domain %>" > Domain (<%= domain %> ) </option>
     </select>
+    <div id = "screen-container">
+        <% screens.forEach((screen,index) => { %>
+            <div id = "screen<%-index%>">          
+                <div class="screen-status" id = "screen-status-<%- index %>"> Not Connected</div>
+                <a class="screen-link" id = "screen-link-<%index%>" href="<%- externalV4Address %>"><%= externalV4Address %><%= index %>   </a>
+            </div>
+            
+        <% }) %>
+    </div>
+    
     <script>
-        
+        let selector = document.getElementById("address-selector");
+        let screenLinks = Array.from(document.getElementsByClassName("screen-link"));
+        selector.onchange = function(){
+            screenLinks.forEach((element,index) =>{
+                element.href = selector.value + String(index);
+                element.innerText = selector.value + String(index);
+            })
+        }
     </script>
 </body>
 </html>

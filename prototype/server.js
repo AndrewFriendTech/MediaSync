@@ -29,13 +29,15 @@ app.use(morgan("dev"));
 
 app.set("view engine","ejs")
 app.get("/console" ,(req,res)=>{
+    const screens = init.screens;
+    res.render("console",{addresses,screens});
+    console.log(addresses)
     
 });
 
 app.get("/screen/:screen_number",(req,res) => {
     const screenNumber = Number(req.params.screen_number);
-    const screens = init.screens;
-    res.render("console",{addresses: addresses,screens});
+    
 })
 
 io.on("connection", socket =>{
