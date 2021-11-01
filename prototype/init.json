@@ -1,0 +1,14 @@
+{
+    "screens":[
+        {
+            "content":[
+                {"src":"video1.mp4","start":0,"end":44},
+                {"src":"video2.mp4","start":0,"end":33}
+            ]
+        },
+        {"mirror":0},
+        {
+            "content":[{"src":"video3.mp4","start":0,"end":44}]
+        }
+    ]
+}
