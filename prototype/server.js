@@ -11,7 +11,7 @@ const app = express()
 const httpServer = createServer(app);
 const io = new IOServer(httpServer)
 
-const addreses = {
+const addresses = {
     v4External: await publicIp.v4(),
     v4Internal: internalIpV4Sync(),
     domain: "http://project.andrewfriend.xyx",
@@ -35,7 +35,7 @@ app.get("/console" ,(req,res)=>{
 app.get("/screen/:screen_number",(req,res) => {
     const screenNumber = Number(req.params.screen_number);
     const screens = init.screens;
-    res.render("console",{addreses,screens});
+    res.render("console",{addresses: addresses,screens});
 })
 
 io.on("connection", socket =>{
@@ -47,5 +47,5 @@ io.on("connection", socket =>{
 
 httpServer.listen(port,()=>
     console.log(`Server started on port ${port}
-    Public IP:${addreses.v4External}
-    Local IP:${addreses.v4Internal}`));
+    Public IP:${addresses.v4External}
+    Local IP:${addresses.v4Internal}`));
