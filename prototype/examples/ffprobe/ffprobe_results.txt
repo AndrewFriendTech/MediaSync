@@ -1,0 +1,53 @@
+null {
+  streams: [
+    {
+      index: 0,
+      codec_name: 'theora',
+      codec_long_name: 'Theora',
+      codec_type: 'video',
+      codec_time_base: '1/24',
+      codec_tag_string: '[0][0][0][0]',
+      codec_tag: '0x0000',
+      width: 854,
+      height: 480,
+      coded_width: 864,
+      coded_height: 480,
+      has_b_frames: 0,
+      pix_fmt: 'yuv420p',
+      level: -99,
+      chroma_location: 'center',
+      refs: 1,
+      r_frame_rate: '24/1',
+      avg_frame_rate: '0/0',
+      time_base: '1/24',
+      start_pts: 0,
+      start_time: '0.000000',
+      duration_ts: 14315,
+      duration: '596.458333',
+      disposition: [Object]
+    },
+    {
+      index: 1,
+      codec_name: 'vorbis',
+      codec_long_name: 'Vorbis',
+      codec_type: 'audio',
+      codec_time_base: '1/48000',
+      codec_tag_string: '[0][0][0][0]',
+      codec_tag: '0x0000',
+      sample_fmt: 'fltp',
+      sample_rate: '48000',
+      channels: 2,
+      channel_layout: 'stereo',
+      bits_per_sample: 0,
+      r_frame_rate: '0/0',
+      avg_frame_rate: '0/0',
+      time_base: '1/48000',
+      start_pts: 0,
+      start_time: '0.000000',
+      duration_ts: 28629999,
+      duration: '596.458313',
+      bit_rate: '192000',
+      disposition: [Object]
+    }
+  ]
+}
