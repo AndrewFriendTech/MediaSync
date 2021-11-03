@@ -2,6 +2,10 @@ import { spawnSync } from "child_process";
 import { path as ffprobePath } from 'ffprobe-static';
 
 class Video{
+    #duration
+    #path
+    #codec
+    
     constructor(name,videoDirectory){
         let path = videoDirectory+"/"+name;
         if(!existsSync(path)){
@@ -14,9 +18,9 @@ class Video{
         let stdout = JSON.parse(result.stdout.toString())
         let streams = stdout.streams;
         let videoData = stdout.streams[0];
-        this._duration = videoData.duration
-        this._codec = codec_name
-        this._path = path
+        this.#duration = videoData.duration
+        this.#codec = codec_name
+        this.#path = path
 
         //now get video metadata
          
@@ -27,7 +31,7 @@ class Video{
      * @returns {number}
      */
     get duration(){
-        return this._duration
+        return this.#duration
     }
     
     /**
@@ -35,11 +39,11 @@ class Video{
      * @returns {string}
      */
     get codec(){
-        return this._codec
+        return this.#codec
     }
 
     get path(){
-        return this._path
+        return this.#path
     }
     
 
