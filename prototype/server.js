@@ -29,12 +29,11 @@ const port = process.env.PORT || 80;
 const init = JSON.parse(readFileSync("init.json",
                     {encoding:"utf-8"}));
 
+//load init section into a screen array
 const screens = [];
 const videos = {};
 
-function screenFactory(init,){
 
-}
 
 //validateInit()
 app.use(morgan("dev"));
