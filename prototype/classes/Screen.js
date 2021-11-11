@@ -1,6 +1,6 @@
-import { Section } from "./Section"
+import { Section } from "./Section.js"
 
-class Screen{
+class MediaScreen{
     #sections
     #socket = null
     #playing = false
@@ -49,14 +49,24 @@ class Screen{
     get playing(){
         return this.playing
     }
+    
+    get sections(){
+        return this.#sections;
+    }
 
 
 
 }
 
-class MirrorScreen extends Screen{
-    constructor(sections,master){
-
+class MirrorScreen extends MediaScreen{
+    /**
+     * 
+     * @param {MediaScreen} master 
+     */
+    constructor(master){
+        super(master.sections)
+        if(!(master instanceof MediaScreen)) throw new TypeError("argument is not MediaScreen");
+        master.registerMirror(this);
     }
 }
 
@@ -65,3 +75,5 @@ class SocketAlreadyAttachedError extends Error {
         new Error("Socket already attached to screen");
     }
 }
+
+export {MediaScreen,MirrorScreen,SocketAlreadyAttachedError};
