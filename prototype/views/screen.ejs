@@ -10,7 +10,42 @@
 <body>
     <div id="screenNumber" style="display: none;"><%= screenNumber %> </div>
     <video id="video"></video>
+    <div id="loading-msg" style="font-size: xx-large;">
+        Loading Videos...
+    </div>
     <script>
+        const socket = io();
+        const VideoDownloadedEvent = new Event("videodownloaded");
+        const screenNumber = 
+            Number(document.getElementById("screenNumber")
+                    .innerText);
+        const videoObjectURLs = [];
+        socket.on("connect",()=>{
+            socket.emit("register",{screen:screenNumber});
+
+        })
+        let urlsToDownload = undefined;
+        socket.on("videos",urls =>{
+            urlsToDownload = urls.length;
+            urls.forEach(url => {
+                fetch("url")
+                .then(response => response.blob())
+                .then(blob => {
+                    videoObjectURLs.push(URL.createObjectURL(blob));
+                    videosDownloaded++;
+                    window.dispatchEvent(VideoDownloadedEvent);
+                })
+            })
+        })
+        
+        let videosDownloaded = 0;
+        window.addEventListener("videodownloaded", e => {
+            if (videosDownloaded == urlsToDownload ){
+                //send event back to server telling ready.
+            }else{
+                console.log(`video ${videosDownloaded} of ${urlsToDownload} downloaded`);
+            }
+        })
         
     </script>
 </body>
