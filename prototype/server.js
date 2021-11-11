@@ -48,6 +48,7 @@ app.get("/console" ,(req,res)=>{
 
 app.get("/screen/:screen_number",(req,res) => {
     const screenNumber = Number(req.params.screen_number);
+    res.render("screen",{screenNumber})''
     
 })
 
