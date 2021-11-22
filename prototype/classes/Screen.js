@@ -72,7 +72,7 @@ class MirrorScreen extends MediaScreen{
 
 class SocketAlreadyAttachedError extends Error {
     constructor(){
-        new Error("Socket already attached to screen");
+        super("Socket already attached to screen");
     }
 }
 
