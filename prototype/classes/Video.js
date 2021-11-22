@@ -1,5 +1,6 @@
 import { spawnSync } from "child_process";
 import { path as ffprobePath } from 'ffprobe-static';
+import { openSync } from "fs";
 
 class Video{
     #duration
@@ -21,6 +22,9 @@ class Video{
         this.#duration = videoData.duration
         this.#codec = codec_name
         this.#path = path
+        this.file = openSync(path);
+        
+
 
         //now get video metadata
          
