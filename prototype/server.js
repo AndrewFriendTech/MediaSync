@@ -6,6 +6,7 @@ import { Server as IOServer } from "socket.io";
 import publicIp from 'public-ip';
 import {internalIpV4Sync} from 'internal-ip';
 import { generateScreens } from "./lib/generateScreens.js";
+import { SocketAlreadyAttachedError } from "./classes/Screen.js";
 
 
 
@@ -56,6 +57,26 @@ io.on("connection", socket =>{
     console.log(`socket ${socket.id} has connected`)
     io.on("disconnect", reason =>{
         console.log(`socket ${socket.id} has disconnected due to ${reason}`)
+    })
+
+    socket.on("register",data =>{
+        let screenNumber = Number(data.screen)
+        if(isNaN(screenNumber)) io.emit("error","requested screen is not a number");
+        else if(screenNumber < 0) io.emit("error","screen number can not be negative");
+        else if(screenNumber >= screens.length) io.emit("error","screen number is more than declared screens");
+        else {
+            try {
+                screens[screenNumber].registerSocket(socket);
+            } catch (error) {
+                if(error instanceof SocketAlreadyAttachedError){
+                    console.error(`Screen ${screenNumber} already has a socket attached`)
+                    io.emit("error","socket already attached to screen");
+                    return;
+                }
+            }
+            console.log(`Screen number ${screenNumber} is registered`);
+        }
+
     })
 })
 
