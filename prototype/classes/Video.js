@@ -10,6 +10,7 @@ class Video{
     #file
     #uuid
     #extension
+    #name
     
     constructor(name,videoDirectory){
         let path = videoDirectory+"/"+name;
@@ -29,6 +30,7 @@ class Video{
         this.#path = path
         this.#file = openSync(path);
         this.#uuid = randomUUID();
+        this.#name = name;
         let nameSplit = name.split(".")
         this.#extension = nameSplit[nameSplit.length -1];
 
@@ -69,6 +71,10 @@ class Video{
 
     get extension(){
         return this.#extension
+    }
+
+    get name(){
+        return this.#name
     }
     
 

@@ -68,8 +68,9 @@ io.on("connection", socket =>{
         else if(screenNumber < 0) io.emit("error","screen number can not be negative");
         else if(screenNumber >= screens.length) io.emit("error","screen number is more than declared screens");
         else {
+            let screen = screens[screenNumber];
             try {
-                screens[screenNumber].registerSocket(socket);
+                screen.registerSocket(socket);
             } catch (error) {
                 if(error instanceof SocketAlreadyAttachedError){
                     console.error(`Screen ${screenNumber} already has a socket attached`)
@@ -78,9 +79,23 @@ io.on("connection", socket =>{
                 }
             }
             console.log(`Screen number ${screenNumber} is registered`);
-            io.emit("videos",screens[screenNumber].videos.map(video =>{
-                return {name:video.path,url:generateURL(video)};
-            }))
+            io.emit("videos",{
+                sections: screen.sections.map(section => {
+                    return {
+                        start:section.start,
+                        end:section.end,
+                        video: section.video.uuid
+                    };   
+                }),
+                videos: screen.videos.map(video => {
+                    return {
+                        url:generateURL(video),
+                        uuid: video.uuid,
+                        name: video.name
+                    }
+                })
+
+            })
         }
 
     })

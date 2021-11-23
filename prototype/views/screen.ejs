@@ -10,6 +10,7 @@
 <body>
     <div id="screenNumber" style="display: none;"><%= screenNumber %> </div>
     <video id="video"></video>
+    <button id = "activate" style="font-size: xx-large;">Activate Screen</button>
     <div id="loading-msg" style="font-size: xx-large;">
         Loading Videos...
     </div>
@@ -28,7 +29,8 @@
         })
         let urlsToDownload = undefined;
         let videosDownloaded = 0;
-        socket.on("videos",videos =>{
+        socket.on("videos",instructions =>{
+            let videos = instructions.videos;
             urlsToDownload = videos.length
             let urls = videos.map(video=>video.url);
             console.log(urls)
