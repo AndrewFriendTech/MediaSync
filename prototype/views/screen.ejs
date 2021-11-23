@@ -15,6 +15,8 @@
     </div>
     <script>
         const socket = io();
+        /** @type {HTMLVideoElement} */
+        const videoElement = document.getElementById("video");
         const VideoDownloadedEvent = new Event("videodownloaded");
         const screenNumber = 
             Number(document.getElementById("screenNumber")
@@ -25,10 +27,13 @@
 
         })
         let urlsToDownload = undefined;
-        socket.on("videos",urls =>{
-            urlsToDownload = urls.length;
+        let videosDownloaded = 0;
+        socket.on("videos",videos =>{
+            urlsToDownload = videos.length
+            let urls = videos.map(video=>video.url);
+            console.log(urls)
             urls.forEach(url => {
-                fetch("url")
+                fetch("/"+url)
                 .then(response => response.blob())
                 .then(blob => {
                     videoObjectURLs.push(URL.createObjectURL(blob));
@@ -37,13 +42,19 @@
                 })
             })
         })
+
+        //socket.on("videos", console.log);
         
-        let videosDownloaded = 0;
+      
         window.addEventListener("videodownloaded", e => {
+            console.log(`video ${videosDownloaded} of ${urlsToDownload} downloaded`);
             if (videosDownloaded == urlsToDownload ){
-                //send event back to server telling ready.
-            }else{
-                console.log(`video ${videosDownloaded} of ${urlsToDownload} downloaded`);
+                socket.emit("ready")
+                videoElement.src = videoObjectURLs[0];
+                videoElement.onended = function(e){
+                    videoElement.src = videoObjectURLs[1]
+                }
+                
             }
         })
         

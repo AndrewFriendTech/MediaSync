@@ -11,8 +11,6 @@ function generateScreens(init){
     const screens = [];
     const videos = {};
     init.screens.every((screen,screenIndex)=>{
-        console.log(screen,screenIndex);
-        //console.log(screen.content);
         const sections = [];
         if(screen.mirror !== undefined){
             console.log("has mirror")
@@ -22,7 +20,6 @@ function generateScreens(init){
                 console.error(`screen ${screenIndex} previous screen is null or this is the first screen, can not mirror.`);
             }
         } else{
-            console.log(screen.content , screenIndex)
             screen.content.every((content,contentIndex) =>{
                 let video; 
                 if(!videos[content.src]){
@@ -31,11 +28,11 @@ function generateScreens(init){
                         video = new Video(content.src,init.videoDirectory)    
                     } catch (error) {
                         if(error instanceof VideoNotFoundError){
-                            console.error(`screen ${screenIndex}, section ${contentIndex}|`
-                                        `Video '${content.src}' not found in '${init.videoDirectory}'.`
+                            console.error(`screen ${screenIndex}, section ${contentIndex}|`,
+                                        `Video '${content.src}' not found in '${init.videoDirectory}'.`,
                                         `screen ${screenIndex} will be null `);
                             screens.push(null);
-                        } 
+                        } else throw error; 
                         //breaks loop
                         return false;
                     }
@@ -46,6 +43,7 @@ function generateScreens(init){
     
                 let section;
                 try {
+                   
                     section = new Section(video,content.start,content.end);     
                 } catch (error) {
                     if( error instanceof VideoRangeError){

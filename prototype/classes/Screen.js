@@ -1,4 +1,5 @@
 import { Section } from "./Section.js"
+import { Video } from "./Video.js"
 
 class MediaScreen{
     #sections
@@ -13,6 +14,7 @@ class MediaScreen{
      * @param {[Section]} sections 
      */
     constructor(sections){
+        console.log("section",sections)
         this.#sections = sections;       
     }
 
@@ -54,8 +56,25 @@ class MediaScreen{
         return this.#sections;
     }
 
+    /**
+     * @returns {[Video]}
+     */
+    get videos(){
+        let videoArr = [];
+        
+        function arrayContains(array,object){
+            for(let element of array)
+                if(Object.is(object,element)) return true;
+            return false
+        }
 
-
+        this.#sections.forEach(section =>{
+            if(!arrayContains(videoArr,section.video)){
+                videoArr.push(section.video)
+            }
+        })
+        return videoArr;
+    }
 }
 
 class MirrorScreen extends MediaScreen{
