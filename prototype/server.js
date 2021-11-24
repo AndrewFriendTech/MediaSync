@@ -20,13 +20,7 @@ const io = new IOServer(httpServer)
 
 
 
-const addresses = {
-    v4External: await publicIp.v4(),
-    v4Internal: internalIpV4Sync(),
-    domain: "http://project.andrewfriend.xyx",
-    ssl: false
-    //add  later ipv6, will require proper error handling
-}
+
 
 const port = process.env.PORT || 80;
 const init = JSON.parse(readFileSync("init.json",
@@ -36,6 +30,14 @@ const screens = generateScreens(init);
 const videos = screens.flatMap(screen => screen.videos);
 
 
+const addresses = {
+    v4External: await publicIp.v4(),
+    v4Internal: internalIpV4Sync(),
+    domain: "http://project.andrewfriend.xyx",
+    ssl: false, 
+    port:port 
+    //add  later ipv6, will require proper error handling
+}
 
 
 //validateInit()
@@ -125,4 +127,4 @@ app.get("/video/:videoName",(req,res)=>{
 httpServer.listen(port,()=>
     console.log(`Server started on port ${port}
     Public IP:${addresses.v4External}
-    Local IP:${addresses.v4Internal}`));
+    Local IP:${addresses.v4Internal}`,));
