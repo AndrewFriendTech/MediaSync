@@ -8,15 +8,17 @@
 </head>
 <body>
     <% const prefix = addresses.ssl?"https://":"http://" %>
-    <% const externalV4Address = prefix + addresses.v4External + "/"; %> 
-    <% const internalV4Address = prefix + addresses.v4Internal + "/"; %>    
-    <% const domain = prefix + addresses.domain + "/" %> 
+    <% const externalV4Address = prefix + addresses.v4External + ":" + addresses.port + "/"; %> 
+    <% const internalV4Address = prefix + addresses.v4Internal + ":" + addresses.port + "/"; %>
+    <% const localhost = prefix + "localhost"  + ":" + addresses.port + "/" %>    
+    <% const domain = prefix + addresses.domain + ":" + addresses.port + "/" %> 
     
     <label for="address-selector">Select address to be used for link:</label>
     <select id="address-selector" name="address-selector">
        <option value = "<%- externalV4Address %>" default > Public IP Address (<%= externalV4Address %> )</option>
        <option value = "<%- internalV4Address %>" > Local IP Address (<%= internalV4Address %> )</option>
        <option value = "<%- domain %>" > Domain (<%= domain %> ) </option>
+       <option value = "<%- localhost %>" > Localhost (<%= localhost %> ) </option>
     </select>
     <div id = "screen-container">
         <% screens.forEach((screen,index) => { %>
