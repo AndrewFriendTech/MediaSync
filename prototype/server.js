@@ -33,7 +33,7 @@ const videos = screens.flatMap(screen => screen.videos);
 const addresses = {
     v4External: await publicIp.v4(),
     v4Internal: internalIpV4Sync(),
-    domain: "http://project.andrewfriend.xyx",
+    domain: "project.andrewfriend.xyx",
     ssl: false, 
     port:port 
     //add  later ipv6, will require proper error handling
