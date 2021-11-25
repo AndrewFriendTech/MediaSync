@@ -8,6 +8,7 @@ import {internalIpV4Sync} from 'internal-ip';
 import { generateScreens } from "./lib/generateScreens.js";
 import { SocketAlreadyAttachedError } from "./classes/Screen.js";
 import { Video } from "./classes/Video.js";
+import { stdout } from "process";
 
 
 
@@ -66,6 +67,7 @@ io.on("connection", socket =>{
 
     socket.on("register",data =>{
         let screenNumber = Number(data.screen)
+        socket.join("screens")
         if(isNaN(screenNumber)) io.emit("error","requested screen is not a number");
         else if(screenNumber < 0) io.emit("error","screen number can not be negative");
         else if(screenNumber >= screens.length) io.emit("error","screen number is more than declared screens");
@@ -81,7 +83,7 @@ io.on("connection", socket =>{
                 }
             }
             console.log(`Screen number ${screenNumber} is registered`);
-            io.emit("videos",{
+            socket.emit("videos",{
                 sections: screen.sections.map(section => {
                     return {
                         start:section.start,
@@ -98,10 +100,24 @@ io.on("connection", socket =>{
                 })
 
             })
+            socket.on("ready",(data)=>{
+                screen.ready = true;
+                onReady()
+            })
+    
         }
-
     })
+
+    
 })
+
+function onReady(){
+    console.log(screens.filter(screen => screen.ready).length)
+    if(screens.every(screen=> screen.ready === true)){
+        console.log("all screens ready")
+        io.to("screens").emit("play");
+    }
+}
 
 /**
  * 
@@ -117,7 +133,7 @@ app.get("/video/:videoName",(req,res)=>{
      let uuid = videoNameSplit[0];
      let video = videos.find(video => video.uuid === uuid);
      if(video){
-         readFile(video.file,(err,data)=>{
+         readFile(video.path,(err,data)=>{
              if(err) res.status(500).send(err);
              else res.send(data);
          })

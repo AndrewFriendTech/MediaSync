@@ -25,7 +25,7 @@
             <div id = "screen<%-index%>"> 
                 <h2 class="screen-title">Screen <%= index %></h2>         
                 <div class="screen-status" id = "screen-status-<%- index %>"> Not Connected</div>
-                <a class="screen-link" id = "screen-link-<%index%>" href="<%- externalV4Address %>"><%= externalV4Address %><%= index %>   </a>
+                <a class="screen-link" id = "screen-link-<%index%>" href="<%- externalV4Address+"screen/"+index %>"><%= externalV4Address+"screen/"%><%= index %>   </a>
             </div>
             
         <% }) %>
@@ -36,8 +36,8 @@
         let screenLinks = Array.from(document.getElementsByClassName("screen-link"));
         selector.onchange = function(){
             screenLinks.forEach((element,index) =>{
-                element.href = selector.value + String(index);
-                element.innerText = selector.value + String(index);
+                element.href = selector.value +"screen/" + String(index);
+                element.innerText = selector.value +"screen/"+ String(index);
             })
         }
     </script>

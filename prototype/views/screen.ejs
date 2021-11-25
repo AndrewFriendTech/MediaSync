@@ -10,7 +10,7 @@
 <body>
     <div id="screenNumber" style="display: none;"><%= screenNumber %> </div>
     <video id="video"></video>
-    <button id = "activate" style="font-size: xx-large;">Activate Screen</button>
+    <button id = "activate" style="font-size: xx-large;" onclick="ready()">Screen Ready</button>
     <div id="loading-msg" style="font-size: xx-large;">
         Loading Videos...
     </div>
@@ -22,23 +22,29 @@
         const screenNumber = 
             Number(document.getElementById("screenNumber")
                     .innerText);
-        const videoObjectURLs = [];
+        const videoObjectURLs = {};
+        const intervals = [];
         socket.on("connect",()=>{
             socket.emit("register",{screen:screenNumber});
 
         })
         let urlsToDownload = undefined;
         let videosDownloaded = 0;
-        socket.on("videos",instructions =>{
+        let instructions = undefined;
+        socket.on("videos",data =>{
+            instructions = data;
+            console.log(instructions);
             let videos = instructions.videos;
             urlsToDownload = videos.length
-            let urls = videos.map(video=>video.url);
-            console.log(urls)
-            urls.forEach(url => {
-                fetch("/"+url)
+            videos.forEach(video => {
+                url = video.url; 
+                let myHeaders = new Headers();
+                myHeaders.append('pragma', 'no-cache');
+                myHeaders.append('cache-control', 'no-cache');
+                fetch("/"+url,{headers:myHeaders})
                 .then(response => response.blob())
                 .then(blob => {
-                    videoObjectURLs.push(URL.createObjectURL(blob));
+                    videoObjectURLs[video.uuid] = URL.createObjectURL(blob);
                     videosDownloaded++;
                     window.dispatchEvent(VideoDownloadedEvent);
                 })
@@ -50,14 +56,78 @@
       
         window.addEventListener("videodownloaded", e => {
             console.log(`video ${videosDownloaded} of ${urlsToDownload} downloaded`);
-            if (videosDownloaded == urlsToDownload ){
-                socket.emit("ready")
-                videoElement.src = videoObjectURLs[0];
-                videoElement.onended = function(e){
-                    videoElement.src = videoObjectURLs[1]
+            if (videosDownloaded == urlsToDownload ){    
+                loaded();    
+            }
+        })
+
+        let currentSectionObj;
+        let currentSectionIndex;
+        let tickInterval;
+        
+
+        function loaded(){
+            currentSectionIndex = 0
+            currentSectionObj = instructions.sections[currentSectionIndex];
+            videoElement.src = getURL(currentSectionObj)
+            console.log(getURL(currentSectionObj))
+            videoElement.currentTime = currentSectionObj.start;
+            tickInterval = setInterval(tick,10)
+        }
+
+        function ready(){
+            socket.emit("ready",{screen:screenNumber})
+            videoElement.requestFullscreen().catch(console.error);
+        }
+
+
+        socket.on("play",play)
+       
+        function play(data){
+            videoElement.play()
+
+        }
+
+        
+        function tick(){
+            
+            if((Math.abs(currentSectionObj.end - videoElement.currentTime) < 0.5)){
+                console.log("in interval")
+                if(currentSectionIndex+1 < instructions.sections.length){
+                    next()    
+                } else{
+                    console.log("sequence ended");
+                    videoElement.pause()
+                    clearInterval(tickInterval)
                 }
                 
             }
+        }
+
+        function next(){
+            currentSectionObj = instructions.sections[++currentSectionIndex];
+            console.log(currentSectionObj);
+            videoElement.src = getURL(currentSectionObj);
+            videoElement.play();
+        }
+
+        socket.on("pause",pause)
+        function pause(){
+            videoElement.pause()
+        }
+
+        function getURL(section){
+            if(!section) throw new TypeError("Section is undefined");
+            console.log(section,videoObjectURLs);
+            console.log(section.video);
+            return videoObjectURLs[section.video];
+        }
+
+        socket.on("disconnect",() => {
+            socket.close()
+            document.exitFullscreen().catch(console.error);
+            document.body.insertAdjacentHTML("afterbegin",
+                `<div class="error">Socket disconnected - please restart</div>`)
         })
         
     </script>

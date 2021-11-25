@@ -15,7 +15,8 @@ class MediaScreen{
      */
     constructor(sections){
         console.log("section",sections)
-        this.#sections = sections;       
+        this.#sections = sections;
+        this.ready = false;       
     }
 
     registerSocket(socket){
