@@ -10,7 +10,10 @@
 <body>
     <div id="screenNumber" style="display: none;"><%= screenNumber %> </div>
     <video id="video"></video>
-    <button id = "activate" style="font-size: xx-large;" onclick="ready()">Screen Ready</button>
+    <br>
+    <button id = "ready" 
+        style="font-size: xx-large;display: none;" 
+        onclick="ready()">Set screen to ready</button>
     <div id="loading-msg" style="font-size: xx-large;">
         Loading Videos...
     </div>
@@ -67,7 +70,9 @@
         
 
         function loaded(){
-            currentSectionIndex = 0
+            document.getElementById("loading-msg").style.display = "none";
+            document.getElementById("ready").style.display = "block";
+            currentSectionIndex = 0;
             currentSectionObj = instructions.sections[currentSectionIndex];
             videoElement.src = getURL(currentSectionObj)
             console.log(getURL(currentSectionObj))
@@ -76,6 +81,7 @@
         }
 
         function ready(){
+            document.getElementById("ready").style.display = "none";
             socket.emit("ready",{screen:screenNumber})
             videoElement.requestFullscreen().catch(console.error);
         }
