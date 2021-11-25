@@ -101,7 +101,7 @@ io.on("connection", socket =>{
                         name: video.name
                     }
                 }),
-                time:screen.playing?videoTimer.time().s:undefined
+                playing:screen.playing
 
             })
             socket.on("ready",(data)=>{
@@ -111,6 +111,10 @@ io.on("connection", socket =>{
 
             socket.on("disconnect", (reason)=>{
                 screen.deregisterSocket();
+            })
+            
+            socket.on("getTimestamp",(data)=>{
+                socket.emit("timestamp",videoTimer.time().s);
             })
     
         }

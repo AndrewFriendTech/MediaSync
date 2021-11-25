@@ -83,19 +83,23 @@
         function ready(){
             document.getElementById("ready").style.display = "none";
             //if already playing will have time
-            if(instructions.time){
-                let timeAndIndex = getTimeAndIndex(instructions.time);
-                console.log(timeAndIndex);
-                currentSectionIndex = timeAndIndex.sectionIndex;
-                console.log(instructions);
-                currentSectionObj = instructions.sections[currentSectionIndex];
-                videoElement.src = getURL(currentSectionObj);
-                play();
-                videoElement.currentTime = timeAndIndex.time;
+            if(instructions.playing){
+                socket.emit("getTimestamp")
+                socket.on("timestamp",onTimestamp) 
             }else{
                 socket.emit("ready",{screen:screenNumber})
             }
            
+        }
+
+        function onTimestamp(timestamp){
+            let timeAndIndex = getTimeAndIndex(timestamp)
+            currentSectionIndex = timeAndIndex.sectionIndex;
+            currentSectionObj = instructions.sections[currentSectionIndex];
+            videoElement.src = getURL(currentSectionObj);
+            videoElement.currentTime = timeAndIndex.time;
+            play()
+
         }
 
         function getTimeAndIndex(time){
