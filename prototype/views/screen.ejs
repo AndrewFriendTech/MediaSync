@@ -83,7 +83,6 @@
         function ready(){
             document.getElementById("ready").style.display = "none";
             socket.emit("ready",{screen:screenNumber})
-            videoElement.requestFullscreen().catch(console.error);
         }
 
 
