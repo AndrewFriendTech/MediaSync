@@ -9,7 +9,9 @@ import { generateScreens } from "./lib/generateScreens.js";
 import { SocketAlreadyAttachedError } from "./classes/Screen.js";
 import { Video } from "./classes/Video.js";
 import { stdout } from "process";
+import { Timer} from 'timer-node';
 
+const videoTimer = new Timer()
 
 
 const app = express()
@@ -88,7 +90,8 @@ io.on("connection", socket =>{
                     return {
                         start:section.start,
                         end:section.end,
-                        video: section.video.uuid
+                        video: section.video.uuid,
+                        
                     };   
                 }),
                 videos: screen.videos.map(video => {
@@ -97,12 +100,17 @@ io.on("connection", socket =>{
                         uuid: video.uuid,
                         name: video.name
                     }
-                })
+                }),
+                time:screen.playing?videoTimer.time().s:undefined
 
             })
             socket.on("ready",(data)=>{
                 screen.ready = true;
                 onReady()
+            })
+
+            socket.on("disconnect", (reason)=>{
+                screen.deregisterSocket();
             })
     
         }
@@ -115,8 +123,14 @@ function onReady(){
     console.log(screens.filter(screen => screen.ready).length)
     if(screens.every(screen=> screen.ready === true)){
         console.log("all screens ready")
-        io.to("screens").emit("play");
+        play()    
     }
+}
+
+function play(){
+    screens.forEach(screen => screen.play());
+    io.to("screens").emit("play");
+    videoTimer.start()
 }
 
 /**

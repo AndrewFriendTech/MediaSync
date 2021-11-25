@@ -5,6 +5,7 @@ class MediaScreen{
     #sections
     #socket = null
     #playing = false
+    #started = false
     /**
      * @type {[MirrorScreen]}
      */
@@ -33,6 +34,7 @@ class MediaScreen{
 
     play(){
         this.#playing = true;
+        this.#started = true;
         this.#mirrors.forEach(mirror => mirror.play());
     }
 
@@ -50,7 +52,11 @@ class MediaScreen{
     }
 
     get playing(){
-        return this.playing
+        return this.#playing
+    }
+
+    get started(){
+        return this.#started;
     }
     
     get sections(){

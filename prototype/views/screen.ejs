@@ -77,12 +77,43 @@
             videoElement.src = getURL(currentSectionObj)
             console.log(getURL(currentSectionObj))
             videoElement.currentTime = currentSectionObj.start;
-            tickInterval = setInterval(tick,10)
+            tickInterval = setInterval(tick,10);
         }
 
         function ready(){
             document.getElementById("ready").style.display = "none";
-            socket.emit("ready",{screen:screenNumber})
+            //if already playing will have time
+            if(instructions.time){
+                let timeAndIndex = getTimeAndIndex(instructions.time);
+                console.log(timeAndIndex);
+                currentSectionIndex = timeAndIndex.sectionIndex;
+                console.log(instructions);
+                currentSectionObj = instructions.sections[currentSectionIndex];
+                videoElement.src = getURL(currentSectionObj);
+                play();
+                videoElement.currentTime = timeAndIndex.time;
+            }else{
+                socket.emit("ready",{screen:screenNumber})
+            }
+           
+        }
+
+        function getTimeAndIndex(time){
+            let sectionIndex = 0;
+            while(true){
+                let section = instructions.sections[sectionIndex];
+                let duration = section.end - section.start
+                if(time > duration){
+                    time -= duration;
+                    sectionIndex++
+                } else if (time < 0){
+                    //time negative
+                    debugger;
+                }else {
+                    break;
+                }
+            }
+            return {time,sectionIndex}
         }
 
 
@@ -105,7 +136,6 @@
                     videoElement.pause()
                     clearInterval(tickInterval)
                 }
-                
             }
         }
 
