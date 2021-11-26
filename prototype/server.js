@@ -52,6 +52,7 @@ app.use(express.static("public"))
 app.get("/",(req,res)=>{
     res.redirect("/console");
 })
+
 app.get("/console" ,(req,res)=>{
     const screens = init.screens;
     res.render("console",{addresses,screens});
