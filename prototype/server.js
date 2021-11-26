@@ -67,6 +67,7 @@ io.on("connection", socket =>{
         console.log(`socket ${socket.id} has disconnected due to ${reason}`)
     })
 
+    //clients
     socket.on("register",data =>{
         let screenNumber = Number(data.screen)
         socket.join("screens")
@@ -106,7 +107,7 @@ io.on("connection", socket =>{
             })
             socket.on("ready",(data)=>{
                 screen.ready = true;
-                onReady()
+                onReady(screenNumber);
             })
 
             socket.on("disconnect", (reason)=>{
@@ -120,11 +121,22 @@ io.on("connection", socket =>{
         }
     })
 
+    //console
+    socket.on("console",data => {
+        socket.join("console");
+        socket.emit("status",screens.map(screen => ({
+            playing:screen.playing,
+            ready:screen.ready,
+            socketRegistered:screen.socketRegistered 
+        })));
+
+    })
+
     
 })
 
-function onReady(){
-    console.log(screens.filter(screen => screen.ready).length)
+function onReady(screenNumber){
+    io.to("console").emit("screenReady",{screen:screenNumber});
     if(screens.every(screen=> screen.ready === true)){
         console.log("all screens ready")
         play()    
@@ -135,6 +147,12 @@ function play(){
     screens.forEach(screen => screen.play());
     io.to("screens").emit("play");
     videoTimer.start()
+}
+
+function pause(){
+    screens.forEach(screen => screen.pause())
+    io.to("screens").emit("pause")
+    videoTimer.pause()
 }
 
 /**

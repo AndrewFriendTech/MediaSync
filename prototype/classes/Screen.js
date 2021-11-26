@@ -40,7 +40,7 @@ class MediaScreen{
 
     pause(){
         this.#playing = false;
-        this.#mirrors.forEach(mirror => mirror.play())
+        this.#mirrors.forEach(mirror => mirror.pause())
     }
 
     /**
@@ -81,6 +81,10 @@ class MediaScreen{
             }
         })
         return videoArr;
+    }
+
+    get socketRegistered(){
+       return this.#socket?true:false;
     }
 }
 

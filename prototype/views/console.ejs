@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>
     <title>MediaSync Console</title>
 </head>
 <body>
@@ -40,6 +41,20 @@
                 element.innerText = selector.value +"screen/"+ String(index);
             })
         }
+        const socket = io();
+
+        socket.on("connect",()=>{
+            socket.emit("console");
+        })
+
+        socket.on("screenReady", (data)=>{
+            let screen = data.screen;
+            let element = document.getElementById(`screen-status-${screen}`);
+            element.classList.add("ready");
+            element.innerHTML = "Ready" ;
+        })
+
+        socket.on("")
     </script>
 </body>
 </html>
