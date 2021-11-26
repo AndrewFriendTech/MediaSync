@@ -42,7 +42,10 @@
         let selector = document.getElementById("address-selector");
         let screenLinks = Array.from(document.getElementsByClassName("screen-link"));
         let playing = false;
-        selector.onchange = function(){
+        selector.onchange = selectorChange;
+        //run initially to react to different defaults
+        selectorChange()
+        function selectorChange(){
             screenLinks.forEach((element,index) =>{
                 element.href = selector.value +"screen/" + String(index);
                 element.innerText = selector.value +"screen/"+ String(index);
