@@ -32,8 +32,11 @@
         <% }) %>
     </div>
     <br>
-    <button id = "pause" onclick="pause()">Pause</button>
-    <button id = "play" onclick="play()">Play</button>
+    <style>.control-button{
+        font-size: xx-large;
+    }</style>
+    <button id = "pause" class="control-button" onclick="pause()">Pause</button>
+    <button id = "play" class="control-button" onclick="play()">Play</button>
     
     <script>
         let selector = document.getElementById("address-selector");
