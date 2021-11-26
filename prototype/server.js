@@ -86,6 +86,7 @@ io.on("connection", socket =>{
                 }
             }
             console.log(`Screen number ${screenNumber} is registered`);
+            io.to("console").emit("screenRegistered",{screen:screenNumber})
             socket.emit("videos",{
                 sections: screen.sections.map(section => {
                     return {

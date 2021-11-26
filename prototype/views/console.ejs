@@ -47,14 +47,24 @@
             socket.emit("console");
         })
 
+
+        socket.on("screenRegistered",(data)=>{
+            let screen = data.screen;
+            let element = document.getElementById(`screen-status-${screen}`);
+            element.classList.add("registered");
+            element.innerHTML = "Registered";
+        })
+
         socket.on("screenReady", (data)=>{
             let screen = data.screen;
             let element = document.getElementById(`screen-status-${screen}`);
+            element.classList.remove("registered")
             element.classList.add("ready");
             element.innerHTML = "Ready" ;
         })
 
-        socket.on("")
+        socket.emit("playing")
+
     </script>
 </body>
 </html>
