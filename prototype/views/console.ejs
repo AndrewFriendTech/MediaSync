@@ -33,6 +33,7 @@
     </div>
     <br>
     <button id = "pause" onclick="pause()">Pause</button>
+    <button id = "play" onclick="play()">Play</button>
     
     <script>
         let selector = document.getElementById("address-selector");
@@ -82,6 +83,10 @@
 
         function pause(){
             socket.emit("pause");
+        }
+        
+        function play(){
+            socket.emit("play");
         }
 
     </script>

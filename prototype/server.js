@@ -120,6 +120,7 @@ io.on("connection", socket =>{
             socket.on("getTimestamp",(data)=>{
                 socket.emit("timestamp",videoTimer.time().s);
             })
+            
     
         }
     })
@@ -133,6 +134,7 @@ io.on("connection", socket =>{
             socketRegistered:screen.socketRegistered 
         })));
         socket.on("pause",pause)
+        socket.on("play",play)
 
     })
 
