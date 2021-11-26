@@ -31,10 +31,13 @@
             
         <% }) %>
     </div>
+    <br>
+    <button id = "pause" onclick="pause()">Pause</button>
     
     <script>
         let selector = document.getElementById("address-selector");
         let screenLinks = Array.from(document.getElementsByClassName("screen-link"));
+        let playing = false;
         selector.onchange = function(){
             screenLinks.forEach((element,index) =>{
                 element.href = selector.value +"screen/" + String(index);
@@ -63,7 +66,23 @@
             element.innerHTML = "Ready" ;
         })
 
-        socket.emit("playing")
+        socket.on("play",() => {
+            let elements = document.getElementsByClassName("screen-status");
+            Array.from(elements).forEach(element => {
+                element.innerHTML = "Playing"
+            })
+        })
+
+        socket.on("pause" ,()=>{
+            let elements = document.getElementsByClassName("screen-status");
+            Array.from(elements).forEach(element => {
+                element.innerHTML = "Paused"
+            })
+        })
+
+        function pause(){
+            socket.emit("pause");
+        }
 
     </script>
 </body>

@@ -110,6 +110,8 @@ io.on("connection", socket =>{
                 screen.ready = true;
                 onReady(screenNumber);
             })
+            
+            
 
             socket.on("disconnect", (reason)=>{
                 screen.deregisterSocket();
@@ -130,6 +132,7 @@ io.on("connection", socket =>{
             ready:screen.ready,
             socketRegistered:screen.socketRegistered 
         })));
+        socket.on("pause",pause)
 
     })
 
@@ -147,12 +150,15 @@ function onReady(screenNumber){
 function play(){
     screens.forEach(screen => screen.play());
     io.to("screens").emit("play");
+    io.to("console").emit("play");
     videoTimer.start()
 }
 
 function pause(){
+    console.log("pause");
     screens.forEach(screen => screen.pause())
     io.to("screens").emit("pause")
+    io.to("console").emit("pause")
     videoTimer.pause()
 }
 
