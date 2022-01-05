@@ -1,0 +1,222 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="36" height="11" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-3">
+      <rect width="318" height="175" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-Web_1920_Screen_2">
+      <rect width="1920" height="1080"/>
+    </clipPath>
+  </defs>
+  <g id="Web_1920_Screen_2" data-name="Web 1920 – Screen 2" clip-path="url(#clip-Web_1920_Screen_2)">
+    <rect width="1920" height="1080" fill="#fff"/>
+    <g id="Rectangle_1" data-name="Rectangle 1" transform="translate(98 102)" fill="#fff" stroke="#707070" stroke-width="1">
+      <rect width="962" height="554" stroke="none"/>
+      <rect x="0.5" y="0.5" width="961" height="553" fill="none"/>
+    </g>
+    <g id="Rectangle_2" data-name="Rectangle 2" transform="translate(98 34)" fill="#e1e1e1" stroke="#707070" stroke-width="1">
+      <rect width="192" height="68" stroke="none"/>
+      <rect x="0.5" y="0.5" width="191" height="67" fill="none"/>
+    </g>
+    <g id="Rectangle_3" data-name="Rectangle 3" transform="translate(332 34)" fill="#fff" stroke="#707070" stroke-width="1">
+      <rect width="196" height="68" stroke="none"/>
+      <rect x="0.5" y="0.5" width="195" height="67" fill="none"/>
+    </g>
+    <g id="Rectangle_4" data-name="Rectangle 4" transform="translate(570 34)" fill="#e1e1e1" stroke="#707070" stroke-width="1">
+      <rect width="201" height="68" stroke="none"/>
+      <rect x="0.5" y="0.5" width="200" height="67" fill="none"/>
+    </g>
+    <g id="Rectangle_5" data-name="Rectangle 5" transform="translate(822 34)" fill="#e1e1e1" stroke="#707070" stroke-width="1">
+      <rect width="201" height="68" stroke="none"/>
+      <rect x="0.5" y="0.5" width="200" height="67" fill="none"/>
+    </g>
+    <text id="Screen_1" data-name="Screen 1" transform="translate(148 78)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Screen 1</tspan></text>
+    <text id="Screen_2" data-name="Screen 2" transform="translate(372 83)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Screen 2</tspan></text>
+    <text id="Screen_3" data-name="Screen 3" transform="translate(600 83)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Screen 3</tspan></text>
+    <text id="Screen_4" data-name="Screen 4" transform="translate(852 83)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Screen 4</tspan></text>
+    <g id="Rectangle_6" data-name="Rectangle 6" transform="translate(98 724)" fill="#fff" stroke="#707070" stroke-width="1">
+      <rect width="971" height="193" stroke="none"/>
+      <rect x="0.5" y="0.5" width="970" height="192" fill="none"/>
+    </g>
+    <text id="Screen_2_timeline" data-name="Screen 2 timeline" transform="translate(119 685)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="22">Screen 2 timeline</tspan></text>
+    <g id="Rectangle_8" data-name="Rectangle 8" transform="translate(119 932)" fill="#fff" stroke="#707070" stroke-linecap="round" stroke-width="1">
+      <rect width="941" height="19" rx="9" stroke="none"/>
+      <rect x="0.5" y="0.5" width="940" height="18" rx="8.5" fill="none"/>
+    </g>
+    <g id="Rectangle_9" data-name="Rectangle 9" transform="translate(164 932)" fill="#aca3a3" stroke="#707070" stroke-linecap="round" stroke-width="1">
+      <rect width="300" height="19" rx="9" stroke="none"/>
+      <rect x="0.5" y="0.5" width="299" height="18" rx="8.5" fill="none"/>
+    </g>
+    <text id="_0:00" data-name="0:00" transform="translate(127 903)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">0:00</tspan></text>
+    <text id="_0:20" data-name="0:20" transform="translate(584 908)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">0:20</tspan></text>
+    <text id="_0:40" data-name="0:40" transform="translate(1012 908)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">0:40</tspan></text>
+    <g id="Component_1_2" data-name="Component 1 – 2" transform="translate(119 749)">
+      <g id="Rectangle_7" data-name="Rectangle 7" fill="#fff" stroke="#707070" stroke-width="1">
+        <rect width="491" height="104" stroke="none"/>
+        <rect x="0.5" y="0.5" width="490" height="103" fill="none"/>
+      </g>
+      <text id="Big_Buck_Bunny_.mp4" data-name="Big Buck Bunny .mp4" transform="translate(44 80)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Big Buck Bunny .mp4</tspan></text>
+      <g id="Rectangle_10" data-name="Rectangle 10" transform="translate(477 7)" fill="#fff" stroke="#707070" stroke-width="1">
+        <rect width="8" height="90" stroke="none"/>
+        <rect x="0.5" y="0.5" width="7" height="89" fill="none"/>
+      </g>
+      <g id="Rectangle_11" data-name="Rectangle 11" transform="translate(7 6)" fill="#fff" stroke="#707070" stroke-width="1">
+        <rect width="8" height="89" stroke="none"/>
+        <rect x="0.5" y="0.5" width="7" height="88" fill="none"/>
+      </g>
+    </g>
+    <g id="Component_1_3" data-name="Component 1 – 3" transform="translate(355 670)">
+      <g id="Group_13" data-name="Group 13" transform="translate(102.667)">
+        <g id="Rectangle_7-2" data-name="Rectangle 7" transform="translate(167.333 83)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="535" height="104" stroke="none"/>
+          <rect x="0.5" y="0.5" width="534" height="103" fill="none"/>
+        </g>
+      </g>
+      <text id="Choir.mp4" transform="translate(305 158)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Choir.mp4</tspan></text>
+      <g id="Rectangle_10-2" data-name="Rectangle 10" transform="translate(782 90)" fill="#fff" stroke="#707070" stroke-width="1">
+        <rect width="8" height="90" stroke="none"/>
+        <rect x="0.5" y="0.5" width="7" height="89" fill="none"/>
+      </g>
+      <g id="Rectangle_11-2" data-name="Rectangle 11" transform="translate(276 91)" fill="#fff" stroke="#707070" stroke-width="1">
+        <rect width="8" height="89" stroke="none"/>
+        <rect x="0.5" y="0.5" width="7" height="88" fill="none"/>
+      </g>
+      <g id="Polygon_1" data-name="Polygon 1" transform="translate(51) rotate(90)" fill="#100f0f">
+        <path d="M 46.21907806396484 50.5 L 0.7809212803840637 50.5 L 23.5 1.194765329360962 L 46.21907806396484 50.5 Z" stroke="none"/>
+        <path d="M 23.5 2.389518737792969 L 1.561836242675781 50 L 45.43816375732422 50 L 23.5 2.389518737792969 M 23.5 0 L 47 51 L 0 51 L 23.5 0 Z" stroke="none" fill="#707070"/>
+      </g>
+      <g id="Component_2_1" data-name="Component 2 – 1" transform="translate(86)">
+        <g id="Rectangle_13" data-name="Rectangle 13" stroke="#707070" stroke-width="1">
+          <rect width="10" height="47" stroke="none"/>
+          <rect x="0.5" y="0.5" width="9" height="46" fill="none"/>
+        </g>
+        <g id="Rectangle_14" data-name="Rectangle 14" transform="translate(17)" stroke="#707070" stroke-width="1">
+          <rect width="10" height="47" stroke="none"/>
+          <rect x="0.5" y="0.5" width="9" height="46" fill="none"/>
+        </g>
+      </g>
+    </g>
+    <rect id="Rectangle_12" data-name="Rectangle 12" width="247" height="211" transform="translate(1069 721)" fill="#fff"/>
+    <line id="Line_1" data-name="Line 1" y2="104" transform="translate(1069.5 753.5)" fill="none" stroke="#707070" stroke-width="1"/>
+    <g id="Group_5" data-name="Group 5">
+      <g id="Rectangle_15" data-name="Rectangle 15" transform="translate(1099 753)" stroke="#707070" stroke-width="1">
+        <rect width="20" height="60" stroke="none"/>
+        <rect x="0.5" y="0.5" width="19" height="59" fill="none"/>
+      </g>
+      <rect id="Rectangle_16" data-name="Rectangle 16" width="20" height="51" transform="translate(1135 775) rotate(90)"/>
+      <text id="Add_video" data-name="Add video" transform="translate(1084 836)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="22">Add </tspan><tspan x="0" y="49">video</tspan></text>
+    </g>
+    <g id="Group_3" data-name="Group 3">
+      <g id="Repeat_Grid_1" data-name="Repeat Grid 1" transform="translate(453 764)" clip-path="url(#clip-path)">
+        <g transform="translate(-421 -764)">
+          <g id="Ellipse_1" data-name="Ellipse 1" transform="translate(421 764)" fill="#0f0f0f" stroke="#707070" stroke-width="1">
+            <ellipse cx="4.5" cy="5.5" rx="4.5" ry="5.5" stroke="none"/>
+            <ellipse cx="4.5" cy="5.5" rx="4" ry="5" fill="none"/>
+          </g>
+        </g>
+        <g transform="translate(-409 -764)">
+          <g id="Ellipse_1-2" data-name="Ellipse 1" transform="translate(421 764)" fill="#0f0f0f" stroke="#707070" stroke-width="1">
+            <ellipse cx="4.5" cy="5.5" rx="4.5" ry="5.5" stroke="none"/>
+            <ellipse cx="4.5" cy="5.5" rx="4" ry="5" fill="none"/>
+          </g>
+        </g>
+        <g transform="translate(-397 -764)">
+          <g id="Ellipse_1-3" data-name="Ellipse 1" transform="translate(421 764)" fill="#0f0f0f" stroke="#707070" stroke-width="1">
+            <ellipse cx="4.5" cy="5.5" rx="4.5" ry="5.5" stroke="none"/>
+            <ellipse cx="4.5" cy="5.5" rx="4" ry="5" fill="none"/>
+          </g>
+        </g>
+      </g>
+      <g id="Group_1" data-name="Group 1">
+        <text id="start" transform="translate(365 771)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">start</tspan></text>
+        <g id="Rectangle_17" data-name="Rectangle 17" transform="translate(365 776)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="65" height="25" stroke="none"/>
+          <rect x="0.5" y="0.5" width="64" height="24" fill="none"/>
+        </g>
+        <text id="_0:10" data-name="0:10" transform="translate(377 794)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">0:10</tspan></text>
+      </g>
+      <g id="Group_2" data-name="Group 2" transform="translate(0 52)">
+        <text id="Length" transform="translate(365 771)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Length</tspan></text>
+        <g id="Rectangle_17-2" data-name="Rectangle 17" transform="translate(365 776)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="65" height="25" stroke="none"/>
+          <rect x="0.5" y="0.5" width="64" height="24" fill="none"/>
+        </g>
+        <text id="_0:20-2" data-name="0:20" transform="translate(377 794)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">0:20</tspan></text>
+      </g>
+    </g>
+    <g id="Group_4" data-name="Group 4" transform="translate(566)">
+      <g id="Repeat_Grid_1-2" data-name="Repeat Grid 1" transform="translate(453 764)" clip-path="url(#clip-path)">
+        <g transform="translate(-421 -764)">
+          <g id="Ellipse_1-4" data-name="Ellipse 1" transform="translate(421 764)" fill="#0f0f0f" stroke="#707070" stroke-width="1">
+            <ellipse cx="4.5" cy="5.5" rx="4.5" ry="5.5" stroke="none"/>
+            <ellipse cx="4.5" cy="5.5" rx="4" ry="5" fill="none"/>
+          </g>
+        </g>
+        <g transform="translate(-409 -764)">
+          <g id="Ellipse_1-5" data-name="Ellipse 1" transform="translate(421 764)" fill="#0f0f0f" stroke="#707070" stroke-width="1">
+            <ellipse cx="4.5" cy="5.5" rx="4.5" ry="5.5" stroke="none"/>
+            <ellipse cx="4.5" cy="5.5" rx="4" ry="5" fill="none"/>
+          </g>
+        </g>
+        <g transform="translate(-397 -764)">
+          <g id="Ellipse_1-6" data-name="Ellipse 1" transform="translate(421 764)" fill="#0f0f0f" stroke="#707070" stroke-width="1">
+            <ellipse cx="4.5" cy="5.5" rx="4.5" ry="5.5" stroke="none"/>
+            <ellipse cx="4.5" cy="5.5" rx="4" ry="5" fill="none"/>
+          </g>
+        </g>
+      </g>
+      <g id="Group_1-2" data-name="Group 1">
+        <text id="start-2" data-name="start" transform="translate(365 771)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">start</tspan></text>
+        <g id="Rectangle_17-3" data-name="Rectangle 17" transform="translate(365 776)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="65" height="25" stroke="none"/>
+          <rect x="0.5" y="0.5" width="64" height="24" fill="none"/>
+        </g>
+        <text id="_0:00-2" data-name="0:00" transform="translate(377 794)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">0:00</tspan></text>
+        <g id="Repeat_Grid_2" data-name="Repeat Grid 2" transform="translate(537 164)" clip-path="url(#clip-path-3)">
+          <g transform="translate(-537 -164)">
+            <g id="Rectangle_18" data-name="Rectangle 18" transform="translate(537 164)" fill="#fff" stroke="#707070" stroke-width="1">
+              <rect width="318" height="77" rx="24" stroke="none"/>
+              <rect x="0.5" y="0.5" width="317" height="76" rx="23.5" fill="none"/>
+            </g>
+            <text id="Save_to_File" data-name="Save to File" transform="translate(575 203)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Save to File</tspan></text>
+          </g>
+          <g transform="translate(-537 -67)">
+            <g id="Rectangle_18-2" data-name="Rectangle 18" transform="translate(537 164)" fill="#fff" stroke="#707070" stroke-width="1">
+              <rect width="318" height="77" rx="24" stroke="none"/>
+              <rect x="0.5" y="0.5" width="317" height="76" rx="23.5" fill="none"/>
+            </g>
+            <text id="Play_current_display" data-name="Play current display" transform="translate(575 203)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Play current display</tspan></text>
+          </g>
+        </g>
+      </g>
+      <g id="Group_2-2" data-name="Group 2" transform="translate(0 52)">
+        <text id="Length-2" data-name="Length" transform="translate(365 771)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Length</tspan></text>
+        <g id="Rectangle_17-4" data-name="Rectangle 17" transform="translate(365 776)" fill="#fff" stroke="#707070" stroke-width="1">
+          <rect width="65" height="25" stroke="none"/>
+          <rect x="0.5" y="0.5" width="64" height="24" fill="none"/>
+        </g>
+        <text id="_0:30" data-name="0:30" transform="translate(376 797)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">0:30</tspan></text>
+      </g>
+    </g>
+    <g id="Group_6" data-name="Group 6">
+      <g id="Rectangle_15-2" data-name="Rectangle 15" transform="translate(1099 753)" stroke="#707070" stroke-width="1">
+        <rect width="20" height="60" stroke="none"/>
+        <rect x="0.5" y="0.5" width="19" height="59" fill="none"/>
+      </g>
+      <rect id="Rectangle_16-2" data-name="Rectangle 16" width="20" height="51" transform="translate(1135 775) rotate(90)"/>
+      <text id="Add_video-2" data-name="Add video" transform="translate(1084 836)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="22">Add </tspan><tspan x="0" y="49">video</tspan></text>
+    </g>
+    <g id="Group_7" data-name="Group 7" transform="translate(-38 -734)">
+      <g id="Group_8" data-name="Group 8" transform="translate(1084 753)">
+        <g id="Rectangle_15-3" data-name="Rectangle 15" transform="translate(12)" stroke="#707070" stroke-width="1">
+          <rect width="20" height="51" stroke="none"/>
+          <rect x="0.5" y="0.5" width="19" height="50" fill="none"/>
+        </g>
+        <rect id="Rectangle_16-3" data-name="Rectangle 16" width="20" height="44" transform="translate(44 13) rotate(90)"/>
+      </g>
+      <text id="Add_video-3" data-name="Add video" transform="translate(1084 801)" fill="#707070" font-size="20" font-family="SegoeUI, Segoe UI"><tspan x="0" y="22">Add video</tspan></text>
+    </g>
+  </g>
+</svg>
