@@ -63,8 +63,29 @@ jump to specified place in display
 ### From Clients to Server
 
 #### `ready`
+client has fully downloaded it's respective videos
+
+#### `error`
+client has an error
 
 
 ### From Server to Clients
 
 #### `videos`
+will contain a list of video objects of the format:
+    [
+        {uuid:<uuid>,path:<http path, should be a relative path>>},
+        ...
+    ]
+
+#### `switch`
+switch to a new screen of the display, contains an array simuluar to the video event. Pause current display, load new display and play unless a pause signal is revieved.
+    
+#### `play`
+video to start playing
+  
+#### `pause`
+video to pause
+
+#### `skip`
+will contain a number for the video to skip too
