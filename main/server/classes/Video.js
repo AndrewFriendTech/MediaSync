@@ -85,7 +85,8 @@ class Video{
     toWeb(){
         return{
             name:this.#name,
-            duration:this.#duration
+            duration:this.#duration,
+            uuid:this.#uuid
         }
     }
     
