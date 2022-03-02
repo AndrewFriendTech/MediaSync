@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>
+    <title>Screen <%= screenNumber %> </title>
+</head>
+<body>
+    <div id="screenNumber" style="display: none;"><%= screenNumber %> </div>
+    <video id="video"></video>
+    <br>
+    <button id = "ready" 
+        style="font-size: xx-large;display: none;" 
+        onclick="ready()">Set screen to ready</button>
+    <div id="loading-msg" style="font-size: xx-large;">
+        Loading Videos...
+    </div>
+    <script>
+        const socket = io();
+        /** @type {HTMLVideoElement} */
+        const videoElement = document.getElementById("video");
+        const VideoDownloadedEvent = new Event("videodownloaded");
+        const screenNumber = 
+            Number(document.getElementById("screenNumber")
+                    .innerText);
+        const videoObjectURLs = {};
+        const intervals = [];
+        socket.on("connect",()=>{
+            socket.emit("register",{screen:screenNumber});
+
+        })
+        let urlsToDownload = undefined;
+        let videosDownloaded = 0;
+        let instructions = undefined;
+        socket.on("videos",data =>{
+            instructions = data;
+            console.log(instructions);
+            let videos = instructions.videos;
+            urlsToDownload = videos.length
+            videos.forEach(video => {
+                url = video.url; 
+                let myHeaders = new Headers();
+                myHeaders.append('pragma', 'no-cache');
+                myHeaders.append('cache-control', 'no-cache');
+                fetch("/"+url,{headers:myHeaders})
+                .then(response => response.blob())
+                .then(blob => {
+                    videoObjectURLs[video.uuid] = URL.createObjectURL(blob);
+                    videosDownloaded++;
+                    window.dispatchEvent(VideoDownloadedEvent);
+                })
+            })
+        })
+
+        //socket.on("videos", console.log);
+        
+      
+        window.addEventListener("videodownloaded", e => {
+            console.log(`video ${videosDownloaded} of ${urlsToDownload} downloaded`);
+            if (videosDownloaded == urlsToDownload ){    
+                loaded();    
+            }
+        })
+
+        let currentSectionObj;
+        let currentSectionIndex;
+        let tickInterval;
+        
+
+        function loaded(){
+            document.getElementById("loading-msg").style.display = "none";
+            document.getElementById("ready").style.display = "block";
+            currentSectionIndex = 0;
+            currentSectionObj = instructions.sections[currentSectionIndex];
+            videoElement.src = getURL(currentSectionObj)
+            console.log(getURL(currentSectionObj))
+            videoElement.currentTime = currentSectionObj.start;
+            tickInterval = setInterval(tick,10);
+        }
+
+        function ready(){
+            document.getElementById("ready").style.display = "none";
+            //if already playing will have time
+            if(instructions.playing){
+                socket.emit("getTimestamp")
+                socket.on("timestamp",onTimestamp) 
+            }else{
+                socket.emit("ready",{screen:screenNumber})
+            }
+           
+        }
+
+        function onTimestamp(timestamp){
+            let timeAndIndex = getTimeAndIndex(timestamp)
+            currentSectionIndex = timeAndIndex.sectionIndex;
+            currentSectionObj = instructions.sections[currentSectionIndex];
+            videoElement.src = getURL(currentSectionObj);
+            videoElement.currentTime = timeAndIndex.time;
+            play()
+
+        }
+
+        function getTimeAndIndex(time){
+            let sectionIndex = 0;
+            while(true){
+                let section = instructions.sections[sectionIndex];
+                let duration = section.end - section.start
+                if(time > duration){
+                    time -= duration;
+                    sectionIndex++
+                } else if (time < 0){
+                    //time negative
+                    debugger;
+                }else {
+                    break;
+                }
+            }
+            return {time,sectionIndex}
+        }
+
+
+        socket.on("play",play)
+       
+        function play(data){
+            videoElement.play()
+
+        }
+
+        
+        function tick(){
+            
+            if((Math.abs(currentSectionObj.end - videoElement.currentTime) < 0.5)){
+                console.log("in interval")
+                if(currentSectionIndex+1 < instructions.sections.length){
+                    next()    
+                } else{
+                    console.log("sequence ended");
+                    videoElement.pause()
+                    clearInterval(tickInterval)
+                }
+            }
+        }
+
+        function next(){
+            currentSectionObj = instructions.sections[++currentSectionIndex];
+            console.log(currentSectionObj);
+            videoElement.src = getURL(currentSectionObj);
+            videoElement.play();
+        }
+
+        socket.on("pause",pause)
+        function pause(){
+            videoElement.pause()
+        }
+
+        function getURL(section){
+            if(!section) throw new TypeError("Section is undefined");
+            console.log(section,videoObjectURLs);
+            console.log(section.video);
+            return videoObjectURLs[section.video];
+        }
+
+        socket.on("disconnect",() => {
+            socket.close()
+            document.exitFullscreen().catch(console.error);
+            document.body.insertAdjacentHTML("afterbegin",
+                `<div class="error">Socket disconnected - please restart</div>`)
+        })
+        
+    </script>
+</body>
+</html>

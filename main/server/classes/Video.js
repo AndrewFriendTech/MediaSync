@@ -23,6 +23,7 @@ class Video{
         const params = ['-show_streams', '-print_format', 'json', path];
         let result = spawnSync(ffprobePath,params)
         let stdout = JSON.parse(result.stdout.toString())
+        console.log(stdout)
         let streams = stdout.streams;
         let videoData = stdout.streams[0];
         this.#duration = videoData.duration
@@ -75,6 +76,17 @@ class Video{
 
     get name(){
         return this.#name
+    }
+
+    set name(newName){
+        this.#name =  newName
+    }
+    
+    toWeb(){
+        return{
+            name:this.#name,
+            duration:this.#duration
+        }
     }
     
 

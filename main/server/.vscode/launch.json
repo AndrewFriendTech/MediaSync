@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "pwa-chrome",
+            "name": "localhost:8000/designer/index.html",
+            "request": "launch",
+            "url": "localhost:8000/designer/index.html"
+        }
+    ]
+}
