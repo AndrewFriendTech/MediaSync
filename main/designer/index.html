@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src = "dist/main.js" ></script>
+</head>
+<body>
+    <div id = "tab-container">
+        <div id = "tab-list">
+            <button id = "add-screen">Add Screen</button>
+        </div>
+        <video id = "playing"></video>
+
+    </div>
+    <div id = "video-list-container">
+        <div class="template video">
+            <span class = "video-name">example.mp4 </span>
+            <a id = "video-add video-option">+</a>
+            <a id = "video-remove video-option">-</a>
+        </div>
+        <div id = "video-upload-container">
+            <div id = "video-upload-label">Upload Video:</div>
+            <input type="file" id="video-upload-input" >
+            <button id = "video-upload-button">Upload button</button>
+        </div>
+    </div>
+    <div id = "button-container">
+        <button id="save"> Save to file</button>
+        <button id="play-display">Play current display</button>
+        <button id="load-screen">Load screen</button>
+    </div>
+    <div id = "display-controls">
+        <button id="display-play">Play</button>
+        <button id="display-pause">Pause</button>
+    </div>
+    <div id = "timeline-container">
+        <div id="sections-container">
+            <div class="section template">
+                <div class="video-name">example.mp4</div>
+                <div class="times-container">
+                    <div class="start-container">
+                        <div class="start-label">start</div>
+                        <input class="start-input" type="number">
+                    </div>
+                    <div class="length-container">
+                        <div class="length-label">start</div>
+                        <input class="length-input" type="number">
+                    </div>
+                </div>
+                <div class="options-container">
+                    <button id="delete-section">Delete Section</button>
+                    <button id="move-section-left">Move Left</button>
+                    <button id="move-section-right">Move Right</button>
+                </div>
+                
+            </div>
+        </div>
+        <div id = time-intervals>
+            <span class = "template time-interval">
+                <span class = "minutes">xx</span>
+                <span class = "separator">:</span>
+                <span class = "seconds">xx</span>
+            </span>
+        </div>
+    
+    </div>
+</body>
+</html>
