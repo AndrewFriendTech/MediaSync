@@ -1,6 +1,6 @@
 import express from "express";
 import morgan from "morgan";
-import {readFileSync,existsSync, copyFileSync, readFile, readdir} from 'fs';
+import {readFileSync,existsSync, copyFileSync, readFile, readdir, readdirSync} from 'fs';
 import { writeFile } from "fs/promises";
 import {createServer} from 'http';
 import { Server as IOServer } from "socket.io";
@@ -25,7 +25,8 @@ const io = new IOServer(httpServer)
 const NO_DISPLAY = 0,LOADING_DISPLAY = 1, IN_ACTION = 2;
 let display_state = NO_DISPLAY
 
-const videos = []
+const videos = readdirSync("video")
+                .map(filename => new Video(filename,"./video"));
 
 
 
@@ -209,10 +210,7 @@ app.put("/video/:videoName",express.raw({limit:"2gb",type:"video/mp4"}),async(re
         
 })
 app.get("/video",(req,res)=>{
-    readdir("video",(err,files)=>{
-        if (err) res.status(500).send({error:err})
-        else res.send(files)
-    })
+    res.send(videos.map(video=>video.toWeb()))
 })
 
 httpServer.listen(port,()=>
