@@ -5,12 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #tab-list > .tab{
+            display: inline;
+        }
+
+    
+        .template{
+            display: none !important;
+        }
+
+        
+    </style>
     <script src = "dist/main.js" ></script>
+    
 </head>
 <body>
     <div id = "tab-container">
         <div id = "tab-list">
+            <div class ="template tab">
+                <!-- controlled by src/lib/createScreen.js -->
+                <a class="name">Screen <span class="number">x</span></a>
+            </div>
             <button id = "add-screen">Add Screen</button>
+        </div>
+        <div id = "screen-container">
+            <video id = "screen-video"></video>
         </div>
         <video id = "playing"></video>
 
@@ -26,6 +46,9 @@
             <input type="file" id="video-upload-input" >
             <button id = "video-upload-button">Upload button</button>
         </div>
+        <!-- controlled by xxxxxxx(tbc)  -->
+        <div id = "video-loading-message" 
+            style="visibility: hidden;">Video loading...</div>
     </div>
     <div id = "button-container">
         <button id="save"> Save to file</button>
