@@ -14,7 +14,6 @@ export function renderVideos(videos){
     videos.forEach(video =>{ 
         /** @type {HTMLElement}*/
         let element = template.cloneNode(true)
-        element.classList.remove("template")
         element.querySelector(".video-name")
             .innerHTML = video.name
         // TO:DO create function for following listeners
