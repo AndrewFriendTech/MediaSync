@@ -14,6 +14,7 @@ export function renderVideos(videos){
     videos.forEach(video =>{ 
         /** @type {HTMLElement}*/
         let element = template.cloneNode(true)
+        element.classList.remove("template")
         element.querySelector(".video-name")
             .innerHTML = video.name
         // TO:DO create function for following listeners
@@ -21,7 +22,7 @@ export function renderVideos(videos){
         //     .addEventListener("click",()=>addVideo(video.uuid))
 
         // element.querySelector(".video-remove")
-        //     .addEventListener("click",()=>addVideo(video.uuid))
+        //     .addEventListener("click",()=>removeVideo(video.uuid))
         container.append(element)
         
     })
