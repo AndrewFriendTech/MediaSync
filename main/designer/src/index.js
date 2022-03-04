@@ -2,15 +2,17 @@ import {elementsOfClass} from './lib/elementsOfClass.js'
 import {uploadVideo} from "./components/video-upload/uploadVideo.js"
 import { getVideos } from './components/video-list/getVideos.js';
 import { renderVideos } from './components/video-list/renderVideos.js';
+import { createScreen } from './components/tab-container/createScreen.js';
 
 
-let selectedScreen = null;
-let videos = []
+window.selectedScreen = null;
+window.videos = []
+window.screens = [
+  
+]
 
 
-function onScreenChange(){
 
-}
 
 function onSave(){
     
@@ -22,7 +24,9 @@ window.onload = () => {
   document.getElementById("video-upload-button")
     .addEventListener("click",uploadVideo);
   videos = getVideos();
-  renderVideos(videos)
+  renderVideos(videos);
+  document.getElementById("add-screen")
+    .addEventListener("click",createScreen)
   
 }
 
