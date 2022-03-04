@@ -10,5 +10,9 @@ export function getTemplate(className){
                         .filter(e => e.classList.contains("template"));                    
     if (templates.length === 0) throw `no template for class ${className}`
     else if (templates.length > 1) throw `multiple templates for ${className}`
-    else return templates[0];
+    else{ 
+        let newElement = elements[0].cloneNode(true)
+        newElement.classList.remove("template")
+        return newElement;
+    };
 }
