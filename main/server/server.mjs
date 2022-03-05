@@ -1,6 +1,6 @@
 import express from "express";
 import morgan from "morgan";
-import {readFileSync,existsSync, copyFileSync, readFile, readdir, readdirSync} from 'fs';
+import {readFileSync,existsSync, copyFileSync, readFile, readdir, readdirSync, mkdirSync} from 'fs';
 import { writeFile } from "fs/promises";
 import {createServer} from 'http';
 import { Server as IOServer } from "socket.io";
@@ -12,7 +12,6 @@ import { Video } from "./classes/Video.js";
 import { stdout } from "process";
 import { Timer} from 'timer-node';
 import { attachStaticRouter } from "./lib/staticRouter.js";
-import { uuid } from "uuidv4";
 import { getUniqueFileName } from "./lib/checkInFiles.js"
 const videoTimer = new Timer()
 
@@ -25,7 +24,9 @@ const io = new IOServer(httpServer)
 const NO_DISPLAY = 0,LOADING_DISPLAY = 1, IN_ACTION = 2;
 let display_state = NO_DISPLAY
 
-const videos = readdirSync("video")
+const videoDirectory = "video";
+if(!existsSync(videoDirectory)) mkdirSync(videoDirectory); 
+const videos = readdirSync(videoDirectory)
                 .map(filename => new Video(filename,"./video"));
 
 
@@ -200,7 +201,6 @@ app.put("/video/:videoName",express.raw({limit:"2gb",type:"video/mp4"}),async(re
     {
         res.status(400).send({error:"invalid file"})
     }else{
-        const videoUUID = uuid()
         const filename = getUniqueFileName(req.params.videoName,"./video","mp4")
         await writeFile("./video/"+ filename,req.body)
         let newVideo = new Video(filename,"./video")
