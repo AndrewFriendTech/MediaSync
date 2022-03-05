@@ -190,7 +190,7 @@ app.get("/video/:videoName",(req,res)=>{
             if(err) res.status(500).send(err)
             else res.send(data)
         })
-    } else res.status(404).send({error:""})
+    } else res.status(404).send({error:"video not found",path})
 })
 
 app.put("/video/:videoName",express.raw({limit:"2gb",type:"video/mp4"}),async(req,res)=>{
