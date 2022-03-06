@@ -13,5 +13,6 @@ export function createScreen(){
     tabTemplate.querySelector(".number").textContent = String(screenNumber);
     tabTemplate.addEventListener("click",()=>onScreenChange(screenNumber))
     tabList.appendChild(tabTemplate);
+    onScreenChange(screenNumber);
     
 }
