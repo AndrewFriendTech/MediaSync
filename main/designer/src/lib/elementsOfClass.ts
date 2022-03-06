@@ -6,7 +6,7 @@
  */
 export function elementsOfClass(className:string){
   const elements = Array.from(document.getElementsByClassName(className))
-    .filter(element => element.classList.contains("template"))
+    .filter(element => !(element.classList.contains("template")))
   if(elements.length === 0) 
     console.log(`no elements of class"${className}"`);
   return elements;
