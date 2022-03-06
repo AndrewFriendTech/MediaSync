@@ -7,7 +7,7 @@ const isProduction = process.env.NODE_ENV == 'production';
 
 const config = {
     mode:"development",
-    entry: './src/index.js',
+    entry: './build/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
     },
@@ -24,8 +24,7 @@ const config = {
             {
                 test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
                 type: 'asset',
-            },
-
+            }
             // Add your rules for custom modules here
             // Learn more about loaders from https://webpack.js.org/loaders/
         ],

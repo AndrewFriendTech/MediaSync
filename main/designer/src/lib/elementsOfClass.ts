@@ -4,7 +4,10 @@
  * @param {string} className class to find 
  * @returns {Element[]} 
  */
-export function elementsOfClass(className){
-  return Array.from(document.getElementsByClassName(className))
+export function elementsOfClass(className:string){
+  const elements = Array.from(document.getElementsByClassName(className))
     .filter(element => element.classList.contains("template"))
+  if(elements.length === 0) 
+    console.log(`no elements of class"${className}"`);
+  return elements;
 }

@@ -1,6 +1,5 @@
 export function uploadVideo(){
-    /** @type {HTMLInputElement} */
-    let fileSelector = document.getElementById("video-upload-input")
+    let fileSelector = document.getElementById("video-upload-input") as HTMLInputElement
     if(fileSelector.files.length == 0){
       //TO:DO code to warn user of error
     } else {
