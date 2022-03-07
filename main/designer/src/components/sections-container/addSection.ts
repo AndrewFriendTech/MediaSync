@@ -28,9 +28,7 @@ export function addSection(section:Section):HTMLElement{
         const num = Number(startInput.value)
         if(num !== NaN){
             section.start = num;
-            console.log(video.duration)
             const lengthMax = video.duration - num;
-            console.log(lengthMax)
             lengthInput.max = String(lengthMax);
             //adjust duration if duration overruns video
             if(section.duration > lengthMax){
