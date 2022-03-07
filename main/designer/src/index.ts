@@ -5,6 +5,9 @@ import { renderVideos } from './components/video-list/renderVideos';
 import { createScreen } from './components/tab-container/createScreen';
 import { Video } from './types/Video';
 import { MediaScreen } from './types/MediaScreen';
+import { addSection } from './components/sections-container/addSection';
+import { Section } from './types/Section';
+import { newSection } from './components/sections-container/newSection';
 
 
 declare global{
@@ -13,6 +16,7 @@ declare global{
       videoData: Video[],
       videoObjectURLs: string
       screens: MediaScreen[]
+      exampleSection:Section
   }
 }
 
@@ -22,7 +26,6 @@ window.videoData = []
 window.screens = [
   
 ]
-
 
 
 
@@ -40,6 +43,9 @@ window.onload = () => {
   renderVideos(window.videoData);
   document.getElementById("add-screen")
     .addEventListener("click",createScreen)
+  console.log("loaded")
+  window.exampleSection = newSection(window.videoData[0])
+  document.getElementById("sections-container").appendChild(addSection(window.exampleSection))
   
 }
 
