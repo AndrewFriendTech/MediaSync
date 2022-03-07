@@ -45,7 +45,6 @@ window.onload = () => {
     .addEventListener("click",createScreen)
   console.log("loaded")
   window.exampleSection = newSection(window.videoData[0])
-  document.getElementById("sections-container").appendChild(addSection(window.exampleSection))
   
 }
 
