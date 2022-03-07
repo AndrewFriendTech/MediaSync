@@ -1,3 +1,4 @@
+import { addSection } from "../components/sections-container/addSection";
 import { elementsOfClass } from "./elementsOfClass";
 export function onScreenChange(newScreenNumber) {
     window.selectedScreen = newScreenNumber;
@@ -14,6 +15,13 @@ export function onScreenChange(newScreenNumber) {
             element.classList.remove("selected");
         }
     });
-    // TO:DO once sections rendered code done , uncomment
-    //renderSections(window.screens[newScreenNumber])
+    const sectionContainer = document.getElementById("sections-container");
+    //if the element is not a template, removes it.
+    elementsOfClass("section").forEach(element => {
+        if (!element.classList.contains("template"))
+            element.remove();
+    });
+    window.screens[window.selectedScreen - 1].content.forEach(section => {
+        sectionContainer.appendChild(addSection(section));
+    });
 }
