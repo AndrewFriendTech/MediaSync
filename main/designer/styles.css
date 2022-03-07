@@ -1,0 +1,79 @@
+#tab-list > .tab{
+    display: inline;
+}
+
+
+.template{
+    display: none !important;
+}
+
+.tab.selected{
+    background-color: lightgray;
+}
+
+#sections-container{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    border-style:outset;
+    margin:10px
+}
+
+
+.section{
+    padding: 5px;
+    margin: 5px;
+    border-style:ridge
+  
+}
+
+body{
+    display:grid;
+    grid-template-areas:"t t t t t t l l l"
+                        "t t t t t t l l l"
+                        "t t t t t t l l l"
+                        "c c c c c c f f f"
+                        "s s s s s s f f f"
+                        "s s s s s s f f f";
+    /* l = list
+       t = tabs+video
+       c = video-controls
+       s = sections
+       f = file-controls */
+}
+
+body * {
+    font-size:large;
+}
+
+#tab-container{
+    grid-area: t;
+}
+
+#video-list-container{
+    grid-area: l;
+}
+
+#display-controls{
+    grid-area: c;
+}
+
+#file-controls>button{
+    display: block;
+    text-align: center;
+    margin:auto;
+    width:80%;
+    margin:10px
+}
+
+#file-controls{
+    grid-area: f;
+    text-align: center;
+}
+
+#timeline-container{
+    grid-area: s;
+}
+
+
+

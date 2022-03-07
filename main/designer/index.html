@@ -5,21 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        #tab-list > .tab{
-            display: inline;
-        }
-
-    
-        .template{
-            display: none !important;
-        }
-
-        .tab.selected{
-            background-color: lightgray;
-        }
-
-    </style>
+    <link rel="stylesheet" href="styles.css">
     <script src = "dist/main.js" ></script>
     
 </head>
@@ -53,15 +39,16 @@
         <div id = "video-loading-message" 
             style="visibility: hidden;">Video loading...</div>
     </div>
-    <div id = "button-container">
-        <button id="save"> Save to file</button>
-        <button id="play-display">Play current display</button>
-        <button id="load-screen">Load screen</button>
-    </div>
     <div id = "display-controls">
         <button id="display-play">Play</button>
         <button id="display-pause">Pause</button>
     </div>
+    <div id = "file-controls">
+        <button id="save"> Save to file</button>
+        <button id="play-server">Play current display on server</button>
+        <button id="load-screen">Load screen</button>
+    </div>
+    
     <div id = "timeline-container">
         <div id="sections-container">
             <div class="section template">
