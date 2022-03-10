@@ -6,6 +6,10 @@ class ObjectURLMap{
     constructor(){
         this.map = {}
     }
+
+    load(videos:Video[]):void{
+        videos.forEach(this.get);
+    }
     
     get(video:Video):string{
         if(this.map[video.uuid]){
