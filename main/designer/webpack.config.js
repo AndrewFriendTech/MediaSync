@@ -8,6 +8,7 @@ const isProduction = process.env.NODE_ENV == 'production';
 const config = {
     mode:"development",
     entry: './build/index.js',
+    target:"es6",
     output: {
         path: path.resolve(__dirname, 'dist'),
     },

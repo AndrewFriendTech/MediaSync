@@ -1,5 +1,6 @@
 import { addSection } from "../components/sections-container/addSection";
 import { elementsOfClass } from "./elementsOfClass";
+import { videoScreenChange } from "./videoFunctions";
 
 export function onScreenChange(newScreenNumber:number){
     window.selectedScreen = newScreenNumber;
@@ -26,4 +27,5 @@ export function onScreenChange(newScreenNumber:number){
         sectionContainer.appendChild(addSection(section))
     })
     
+    videoScreenChange()
 }

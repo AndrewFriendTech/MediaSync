@@ -1,6 +1,6 @@
 import {Video} from 'Video'
 
-class ObjectURLMap{
+export class ObjectURLMap{
     private map:any;
 
     constructor(){
