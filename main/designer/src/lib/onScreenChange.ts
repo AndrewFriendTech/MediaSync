@@ -1,6 +1,6 @@
-import { addSection } from "../components/sections-container/addSection";
-import { elementsOfClass } from "./elementsOfClass";
-import { videoScreenChange } from "./videoFunctions";
+import { addSection } from "../components/sections-container/addSection.js";
+import { elementsOfClass } from "./elementsOfClass.js";
+import { videoScreenChange } from "./videoFunctions.js";
 
 export function onScreenChange(newScreenNumber:number){
     window.selectedScreen = newScreenNumber;

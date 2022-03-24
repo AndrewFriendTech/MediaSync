@@ -1,0 +1,15 @@
+{
+    "videoDirectory":"public/video",
+    "screens":[
+        {
+            "content":[
+                {"src":"video1.ogv","start":0,"end":30},
+                {"src":"video2.mp4","start":0,"end":30}
+            ]
+        },
+        {"mirror":0},
+        {
+            "content":[{"src":"video1.ogv","start":0,"end":30}]
+        }
+    ]
+}

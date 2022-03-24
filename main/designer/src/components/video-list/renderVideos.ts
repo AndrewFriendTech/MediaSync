@@ -1,8 +1,8 @@
-import { elementsOfClass } from "../../lib/elementsOfClass";
-import {getTemplate} from "../../lib/getTemplate"
-import { Video } from "../../types/Video";
-import { addSection } from "../sections-container/addSection";
-import { newSection } from "../sections-container/newSection";
+import { elementsOfClass } from "../../lib/elementsOfClass.js";
+import {getTemplate} from "../../lib/getTemplate.js"
+import { Video } from "../../types/Video.js";
+import { addSection } from "../sections-container/addSection.js";
+import { newSection } from "../sections-container/newSection.js";
 
 
 

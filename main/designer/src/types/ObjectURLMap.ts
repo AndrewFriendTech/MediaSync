@@ -1,4 +1,4 @@
-import {Video} from 'Video'
+import {Video} from 'Video.js'
 
 export class ObjectURLMap{
     private map:any;
@@ -8,7 +8,7 @@ export class ObjectURLMap{
     }
 
     load(videos:Video[]):void{
-        videos.forEach(this.get);
+        videos.forEach(()=>this.get);
     }
     
     get(video:Video):string{

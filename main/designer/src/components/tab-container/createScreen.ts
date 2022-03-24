@@ -1,6 +1,6 @@
-import { getTemplate } from "../../lib/getTemplate"
-import { onScreenChange } from "../../lib/onScreenChange";
-import { MediaScreen } from "../../types/MediaScreen";
+import { getTemplate } from "../../lib/getTemplate.js"
+import { onScreenChange } from "../../lib/onScreenChange.js";
+import { MediaScreen } from "../../types/MediaScreen.js";
 
 export function createScreen(){
     const screenNumber = window.screens.length+1;

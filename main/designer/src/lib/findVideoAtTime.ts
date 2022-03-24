@@ -1,5 +1,5 @@
-import { MediaScreen } from "../types/MediaScreen";
-import { Video } from "../types/Video";
+import { MediaScreen } from "../types/MediaScreen.js";
+import { Video } from "../types/Video.js";
 
 function findVideoAtTime(screen:MediaScreen,time:number):{
     video:Video,

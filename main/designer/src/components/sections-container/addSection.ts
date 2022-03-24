@@ -1,5 +1,5 @@
-import { getTemplate } from "../../lib/getTemplate";
-import { Section } from "../../types/Section";
+import { getTemplate } from "../../lib/getTemplate.js";
+import { Section } from "../../types/Section.js";
 
 export function addSection(section:Section):HTMLElement{
     const template = getTemplate("section");

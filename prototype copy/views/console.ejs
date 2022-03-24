@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>
+    <title>MediaSync Console</title>
+</head>
+<body>
+    <% const prefix = addresses.ssl?"https://":"http://" %>
+    <% const externalV4Address = prefix + addresses.v4External + ":" + addresses.port + "/"; %> 
+    <% const internalV4Address = prefix + addresses.v4Internal + ":" + addresses.port + "/"; %>
+    <% const localhost = prefix + "localhost"  + ":" + addresses.port + "/" %>    
+    <% const domain = prefix + addresses.domain + ":" + addresses.port + "/" %> 
+    
+    <label for="address-selector">Select address to be used for link:</label>
+    <select id="address-selector" name="address-selector">
+       <option value = "<%- externalV4Address %>" default > Public IP Address (<%= externalV4Address %> )</option>
+       <option value = "<%- internalV4Address %>" > Local IP Address (<%= internalV4Address %> )</option>
+       <option value = "<%- domain %>" > Domain (<%= domain %> ) </option>
+       <option value = "<%- localhost %>" > Localhost (<%= localhost %> ) </option>
+    </select>
+    <div id = "screen-container">
+        <% screens.forEach((screen,index) => { %>
+            <div id = "screen<%-index%>"> 
+                <h2 class="screen-title">Screen <%= index %></h2>         
+                <div class="screen-status" id = "screen-status-<%- index %>"> Not Connected</div>
+                <a class="screen-link" id = "screen-link-<%index%>" href="<%- externalV4Address+"screen/"+index %>"><%= externalV4Address+"screen/"%><%= index %>   </a>
+            </div>
+            
+        <% }) %>
+    </div>
+    <br>
+    <style>.control-button{
+        font-size: xx-large;
+    }</style>
+    <button id = "pause" class="control-button" onclick="pause()">Pause</button>
+    <button id = "play" class="control-button" onclick="play()">Play</button>
+    
+    <script>
+        let selector = document.getElementById("address-selector");
+        let screenLinks = Array.from(document.getElementsByClassName("screen-link"));
+        let playing = false;
+        selector.onchange = selectorChange;
+        //run initially to react to different defaults
+        selectorChange()
+        function selectorChange(){
+            screenLinks.forEach((element,index) =>{
+                element.href = selector.value +"screen/" + String(index);
+                element.innerText = selector.value +"screen/"+ String(index);
+            })
+        }
+        const socket = io();
+
+        socket.on("connect",()=>{
+            socket.emit("console");
+        })
+
+
+        socket.on("screenRegistered",(data)=>{
+            let screen = data.screen;
+            let element = document.getElementById(`screen-status-${screen}`);
+            element.classList.add("registered");
+            element.innerHTML = "Registered";
+        })
+
+        socket.on("screenReady", (data)=>{
+            let screen = data.screen;
+            let element = document.getElementById(`screen-status-${screen}`);
+            element.classList.remove("registered")
+            element.classList.add("ready");
+            element.innerHTML = "Ready" ;
+        })
+
+        socket.on("play",() => {
+            let elements = document.getElementsByClassName("screen-status");
+            Array.from(elements).forEach(element => {
+                element.innerHTML = "Playing"
+            })
+        })
+
+        socket.on("pause" ,()=>{
+            let elements = document.getElementsByClassName("screen-status");
+            Array.from(elements).forEach(element => {
+                element.innerHTML = "Paused"
+            })
+        })
+
+        function pause(){
+            socket.emit("pause");
+        }
+        
+        function play(){
+            socket.emit("play");
+        }
+
+    </script>
+</body>
+</html>

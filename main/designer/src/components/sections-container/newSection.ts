@@ -1,5 +1,5 @@
-import { Section } from "../../types/Section";
-import { Video } from "../../types/Video";
+import { Section } from "../../types/Section.js";
+import { Video } from "../../types/Video.js";
 
 //creates new blank section from video by default videos entire length
 export function newSection(video:Video):Section{

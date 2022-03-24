@@ -1,17 +1,17 @@
-import {elementsOfClass} from './lib/elementsOfClass'
-import {uploadVideo} from "./components/video-upload/uploadVideo"
-import { getVideos } from './components/video-list/getVideos';
-import { renderVideos } from './components/video-list/renderVideos';
-import { createScreen } from './components/tab-container/createScreen';
-import { Video } from './types/Video';
-import { MediaScreen } from './types/MediaScreen';
-import { addSection } from './components/sections-container/addSection';
+import {elementsOfClass} from './lib/elementsOfClass.js'
+import {uploadVideo} from "./components/video-upload/uploadVideo.js"
+import { getVideos } from './components/video-list/getVideos.js';
+import { renderVideos } from './components/video-list/renderVideos.js';
+import { createScreen } from './components/tab-container/createScreen.js';
+import { Video } from './types/Video.js';
+import { MediaScreen } from './types/MediaScreen.js';
+import { addSection } from './components/sections-container/addSection.js';
 import { Section } from './types/Section';
-import { newSection } from './components/sections-container/newSection';
-import { VideoState } from './types/VideoState';
-import { Stopwatch } from './lib/stopwatch';
-import { ObjectURLMap } from './types/ObjectURLMap';
-import { pauseVideo, playVideo } from './lib/videoFunctions';
+import { newSection } from './components/sections-container/newSection.js';
+import { VideoState } from './types/VideoState.js';
+import { Stopwatch } from './lib/stopwatch.js';
+import { ObjectURLMap } from './types/ObjectURLMap.js';
+import { pauseVideo, playVideo } from './lib/videoFunctions.js';
 
 declare global{
   interface Window{

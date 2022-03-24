@@ -1,9 +1,9 @@
-import { Bound } from "../types/Bound";
-import { MediaScreen } from "../types/MediaScreen";
-import { ObjectURLMap } from "../types/ObjectURLMap";
-import { Section } from "../types/Section";
-import { Video } from "../types/Video";
-import { VideoState } from "../types/VideoState";
+import { Bound } from "../types/Bound.js";
+import { MediaScreen } from "../types/MediaScreen.js";
+import { ObjectURLMap } from "../types/ObjectURLMap.js";
+import { Section } from "../types/Section.js";
+import { Video } from "../types/Video.js";
+import { VideoState } from "../types/VideoState.js";
 
 let timeInterval: number | NodeJS.Timer;
 let time  = 0;
@@ -62,7 +62,7 @@ export function pauseVideo(){
 }
 
 export function videoScreenChange(){
-    if(window.screens[window.selectedScreen-1].content.length > 0){
+    if( window.screens[window.selectedScreen-1].content.length > 0){
         videoDiv.pause()
         clearInterval(timeInterval as number)
         screenBounds = getBounds(window.screens[window.selectedScreen-1])
