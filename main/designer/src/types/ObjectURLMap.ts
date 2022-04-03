@@ -1,4 +1,5 @@
 import {Video} from 'Video.js'
+import { stringToBlob } from '../lib/stringToBlob.js';
 
 export class ObjectURLMap{
     private map:any;
@@ -10,25 +11,19 @@ export class ObjectURLMap{
     load(videos:Video[]):void{
         videos.forEach(()=>this.get);
     }
+
+    set(uuid:string,blob:Blob):void{
+        let objectURL = URL.createObjectURL(blob)
+        this.map[uuid] = objectURL;
+    }
     
     get(video:Video):string{
+        console.log(video.uuid)
+        console.log(JSON.stringify(this.map))
         if(this.map[video.uuid]){
             return this.map[video.uuid];
         } else {
-            if(window.videoData.find(e => e.uuid === video.uuid)){
-                const request = new XMLHttpRequest()
-                request.open("GET","/video/"+video.name,false);
-                request.send();
-                if(request.response instanceof Blob){
-                    const objectURL = URL.createObjectURL(request.response)
-                    this.map[video.uuid] = objectURL ;
-                    return objectURL;
-                } else {
-                    throw "request response is not blob"
-                }
-            } else {
-                throw "video not found in videodata"
-            };
+            throw "video not found"
         }
     }
 }

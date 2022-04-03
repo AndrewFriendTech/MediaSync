@@ -33,7 +33,7 @@ export function startVideo(){
         return;
     }
 
-    if(window.screens[window.selectedScreen-1].content.length = 0){
+    if(window.screens[window.selectedScreen-1].content.length == 0){
         console.log("no sections in sreen yet")
         return
     }
@@ -42,13 +42,21 @@ export function startVideo(){
 
     if(window.videoState === VideoState.notLoaded){
         //TO:DO loading message
-        window.objectURLMap.load(window.videoData);
-        screenBounds = getBounds(window.screens[window.selectedScreen-1]);
-        const firstVideo = findFirstVideo(window.screens[window.selectedScreen-1])
-        if(!firstVideo) throw "firstVideo is not defined"
-        videoDiv.src = window.objectURLMap.get(firstVideo);
-        videoDiv.play()
-        window.videoState = VideoState.playing
+        window.videoData.forEach(video =>{
+            fetch(`/video/${video.name}`)
+            .then(response => response.blob())
+            .then(blob => {
+                window.objectURLMap.set(video.uuid,blob)
+                screenBounds = getBounds(window.screens[window.selectedScreen-1]);
+                const firstVideo = findFirstVideo(window.screens[window.selectedScreen-1])
+                if(!firstVideo) throw "firstVideo is not defined"
+                videoDiv.src = window.objectURLMap.get(firstVideo);
+                videoDiv.play()
+                window.videoState = VideoState.playing
+            })
+            
+        })
+        
     } else console.log("video is already playing")
 }
 
@@ -114,6 +122,7 @@ function getBounds(screen:MediaScreen):Bound[]{
 
 function findFirstVideo(screen:MediaScreen):Video{
     if(screen.content.length > 0){
+        console.log(screen,window.videoData)
         const firstVideo = window.videoData.find(video => video.uuid == screen.content[0].uuid);
         if(!firstVideo) throw "firstVideo is undefined"; 
         return firstVideo
