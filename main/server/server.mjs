@@ -13,6 +13,7 @@ import { stdout } from "process";
 import { Timer} from 'timer-node';
 import { attachStaticRouter } from "./lib/staticRouter.js";
 import { getUniqueFileName } from "./lib/checkInFiles.js"
+import { escapeSlashes } from "./lib/escapeSlashes.js";
 const videoTimer = new Timer()
 
 
@@ -185,7 +186,8 @@ function generateURL(video){
 }
 
 app.get("/video/:videoName",(req,res)=>{
-    const path = "video/" + encodeURIComponent(req.params.videoName);
+    const vidName = req.params.videoName
+    const path = "video/" + escapeSlashes(decodeURIComponent(vidName));
     if(existsSync(path)){
         readFile(path,(err,data)=>{
             if(err) res.status(500).send(err)
