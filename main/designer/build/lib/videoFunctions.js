@@ -38,11 +38,13 @@ export function startVideo() {
                 window.objectURLMap.set(video.uuid, blob);
                 screenBounds = getBounds(window.screens[window.selectedScreen - 1]);
                 const firstVideo = findFirstVideo(window.screens[window.selectedScreen - 1]);
+                console.log("first video", firstVideo);
                 if (!firstVideo)
                     throw "firstVideo is not defined";
                 videoDiv.src = window.objectURLMap.get(firstVideo);
                 videoDiv.play();
                 window.videoState = VideoState.playing;
+                timeInterval = setInterval(onTick, 1000);
             });
         });
     }
@@ -80,6 +82,8 @@ function onTick() {
         videoDiv.currentTime = currentSection.start;
         screenCurrentSection++;
     }
+    time += 1;
+    console.log(time, videoDiv.currentTime);
 }
 //when numbers are reached , skip to next section
 function getBounds(screen) {
