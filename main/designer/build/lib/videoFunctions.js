@@ -42,6 +42,7 @@ export function startVideo() {
                 if (!firstVideo)
                     throw "firstVideo is not defined";
                 videoDiv.src = window.objectURLMap.get(firstVideo);
+                videoDiv.currentTime = window.screens[window.selectedScreen - 1].content[0].start;
                 videoDiv.play();
                 window.videoState = VideoState.playing;
                 timeInterval = setInterval(onTick, 1000);
@@ -78,11 +79,17 @@ function onTick() {
     console.log(screenBounds);
     if (screenBounds[screenCurrentSection]
         && eq(screenBounds[screenCurrentSection].value, time)) {
-        videoDiv.src = window.objectURLMap.get(screenBounds[screenCurrentSection].next);
-        const currentSection = window.screens[window.selectedScreen - 1].content[screenCurrentSection];
-        videoDiv.currentTime = currentSection.start;
-        videoDiv.play();
-        screenCurrentSection++;
+        if (screenBounds[screenCurrentSection].next) {
+            videoDiv.src = window.objectURLMap.get(screenBounds[screenCurrentSection].next);
+            const currentSection = window.screens[window.selectedScreen - 1].content[screenCurrentSection];
+            videoDiv.currentTime = currentSection.start;
+            videoDiv.play();
+            screenCurrentSection++;
+        }
+        else {
+            videoDiv.pause();
+            clearInterval(timeInterval);
+        }
     }
     time += 1;
     console.log(time, videoDiv.currentTime);
@@ -108,7 +115,7 @@ function getBounds(screen) {
             }
         }
         else
-            bounds.push(null);
+            bounds.push({ value: timeSum });
     }
     return bounds;
 }
