@@ -76,10 +76,12 @@ function onTick() {
     //in case more fine tuned time algorithm is used.
     let eq = (a, b) => Math.abs(a - b) < 0.5;
     console.log(screenBounds);
-    if (eq(screenBounds[screenCurrentSection].value, time)) {
+    if (screenBounds[screenCurrentSection]
+        && eq(screenBounds[screenCurrentSection].value, time)) {
         videoDiv.src = window.objectURLMap.get(screenBounds[screenCurrentSection].next);
         const currentSection = window.screens[window.selectedScreen - 1].content[screenCurrentSection];
         videoDiv.currentTime = currentSection.start;
+        videoDiv.play();
         screenCurrentSection++;
     }
     time += 1;
@@ -98,10 +100,12 @@ function getBounds(screen) {
         if (i + 1 < screen.content.length) {
             nextSection = screen.content[i + 1];
             nextVideo = window.videoData.find(video => nextSection.uuid == video.uuid);
-            if (nextVideo = undefined)
+            if (nextVideo == undefined)
                 throw "next video not found";
-            else
+            else {
+                console.log("found and pushed", nextVideo);
                 bounds.push({ value: timeSum, next: nextVideo });
+            }
         }
         else
             bounds.push(null);

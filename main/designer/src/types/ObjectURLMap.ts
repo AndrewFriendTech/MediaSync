@@ -1,5 +1,4 @@
 import {Video} from 'Video.js'
-import { stringToBlob } from '../lib/stringToBlob.js';
 
 export class ObjectURLMap{
     private map:any;
