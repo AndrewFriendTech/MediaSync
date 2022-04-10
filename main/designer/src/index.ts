@@ -47,8 +47,10 @@ function onSave(){
 window.addEventListener("load", () => {
   document.getElementById("video-upload-button")
     .addEventListener("click",uploadVideo);
-  window.videoData = getVideos();
-  renderVideos(window.videoData);
+  getVideos((videoData =>{
+    window.videoData = videoData;
+    renderVideos(window.videoData);
+  }));
   document.getElementById("add-screen")
     .addEventListener("click",createScreen)
   document.getElementById("display-play")
@@ -56,7 +58,6 @@ window.addEventListener("load", () => {
   document.getElementById("display-pause")
     .addEventListener("click",pauseVideo)
   console.log("loaded")
-  window.exampleSection = newSection(window.videoData[0])
   
 })
 

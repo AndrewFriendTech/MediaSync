@@ -1,10 +1,11 @@
+import { Video } from "../../types/Video";
+
 /**
  * 
  * @returns {[Video]} array of fetched videos  
  */
-export function getVideos(){
-        const request = new XMLHttpRequest()
-        request.open("GET","/video",false)
-        request.send() 
-        return JSON.parse(request.response)
+export function getVideos(callback:((videoData:Video[])=>void)){
+        fetch("/video")
+        .then(response =>response.json())
+        .then(object => callback(object as Video[]))
 }

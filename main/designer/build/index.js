@@ -2,7 +2,6 @@ import { uploadVideo } from "./components/video-upload/uploadVideo.js";
 import { getVideos } from './components/video-list/getVideos.js';
 import { renderVideos } from './components/video-list/renderVideos.js';
 import { createScreen } from './components/tab-container/createScreen.js';
-import { newSection } from './components/sections-container/newSection.js';
 import { VideoState } from './types/VideoState.js';
 import { Stopwatch } from './lib/stopwatch.js';
 import { ObjectURLMap } from './types/ObjectURLMap.js';
@@ -19,8 +18,10 @@ function onSave() {
 window.addEventListener("load", () => {
     document.getElementById("video-upload-button")
         .addEventListener("click", uploadVideo);
-    window.videoData = getVideos();
-    renderVideos(window.videoData);
+    getVideos((videoData => {
+        window.videoData = videoData;
+        renderVideos(window.videoData);
+    }));
     document.getElementById("add-screen")
         .addEventListener("click", createScreen);
     document.getElementById("display-play")
@@ -28,5 +29,4 @@ window.addEventListener("load", () => {
     document.getElementById("display-pause")
         .addEventListener("click", pauseVideo);
     console.log("loaded");
-    window.exampleSection = newSection(window.videoData[0]);
 });
