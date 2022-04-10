@@ -1,4 +1,5 @@
 import { getTemplate } from "../../lib/getTemplate.js";
+import { renderSections } from "./renderSections.js";
 export function addSection(section) {
     const template = getTemplate("section");
     const video = window.videoData.find(video => video.uuid == section.uuid);
@@ -8,6 +9,8 @@ export function addSection(section) {
     const lengthInput = template.querySelector(".length-input");
     const startInput = template.querySelector(".start-input");
     const deleteButton = template.querySelector(".delete-section");
+    const leftButton = template.querySelector(".move-section-left");
+    const rightButton = template.querySelector(".move-section-right");
     //set video name text
     template.querySelector(".video-name").textContent = section.src;
     //set values
@@ -51,5 +54,24 @@ export function addSection(section) {
         else
             throw "section not found";
     });
+    leftButton.addEventListener("click", () => {
+        const index = window.screens[window.selectedScreen - 1].content.indexOf(section);
+        if (index > 0) {
+            swapSections(window.screens[window.selectedScreen - 1].content, index, index - 1);
+            renderSections();
+        }
+    });
+    rightButton.addEventListener("click", () => {
+        const index = window.screens[window.selectedScreen - 1].content.indexOf(section);
+        if (index < window.screens[window.selectedScreen - 1].content.length - 1) {
+            swapSections(window.screens[window.selectedScreen - 1].content, index, index + 1);
+            renderSections();
+        }
+    });
     return template;
+}
+function swapSections(sectionArray, a, b) {
+    const temp = sectionArray[a];
+    sectionArray[a] = sectionArray[b];
+    sectionArray[b] = temp;
 }
