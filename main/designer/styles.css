@@ -12,25 +12,28 @@
 }
 
 #sections-container{
-    display: flex;
-    flex-direction: row;
+    display: block;
     padding: 10px;
     border-style:outset;
-    margin:10px
+    margin:10px;
+    width: 70vw;
+    white-space: nowrap;
+    overflow-x: scroll;   
 }
 
 
 .section{
     padding: 5px;
     margin: 5px;
-    border-style:ridge
-  
+    border-style:ridge;
+    display: inline-grid;
 }
 
 body{
     display:grid;
     grid-template-columns: 3fr 1fr;
     grid-template-rows: 3fr 2fr;
+    overflow: revert
 }
 
 body * {
@@ -80,4 +83,3 @@ body * {
     grid-row-start: 2;
     grid-row-end: 3;
 }
-
