@@ -8,6 +8,7 @@ export function addSection(section:Section):HTMLElement{
     //TO:DO download video to computer
     const lengthInput = template.querySelector(".length-input") as HTMLInputElement;
     const startInput = template.querySelector(".start-input") as HTMLInputElement;
+    const deleteButton = template.querySelector(".delete-section") as HTMLButtonElement;
     //set video name text
     template.querySelector(".video-name").textContent = section.src;
     //set values
@@ -18,12 +19,14 @@ export function addSection(section:Section):HTMLElement{
     startInput.min = String(0);
     lengthInput.max = String(video.duration);
     lengthInput.min = String(0);
+    
     //set event listeners
     lengthInput.addEventListener("input",()=>{
         const num = Number(lengthInput.value)
         if(num !== NaN) section.duration = num;
         else console.error("duration input NaN",lengthInput.value)
     })
+
     startInput.addEventListener("input",()=>{
         const num = Number(startInput.value)
         if(num !== NaN){
@@ -38,5 +41,18 @@ export function addSection(section:Section):HTMLElement{
         } 
         else return console.error("start input NaN",startInput.value)
     })
+
+    deleteButton.addEventListener("click" , () =>{
+        const index = window.screens[window.selectedScreen - 1]
+                        .content.indexOf(section);
+        if(index>=0){
+            window.screens[window.selectedScreen-1].content.splice(index,1);
+            template.remove()
+        } else throw "section not found"
+    })
+
+    
+
+
     return template;
 }

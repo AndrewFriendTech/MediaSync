@@ -7,6 +7,7 @@ export function addSection(section) {
     //TO:DO download video to computer
     const lengthInput = template.querySelector(".length-input");
     const startInput = template.querySelector(".start-input");
+    const deleteButton = template.querySelector(".delete-section");
     //set video name text
     template.querySelector(".video-name").textContent = section.src;
     //set values
@@ -39,6 +40,16 @@ export function addSection(section) {
         }
         else
             return console.error("start input NaN", startInput.value);
+    });
+    deleteButton.addEventListener("click", () => {
+        const index = window.screens[window.selectedScreen - 1]
+            .content.indexOf(section);
+        if (index >= 0) {
+            window.screens[window.selectedScreen - 1].content.splice(index, 1);
+            template.remove();
+        }
+        else
+            throw "section not found";
     });
     return template;
 }
