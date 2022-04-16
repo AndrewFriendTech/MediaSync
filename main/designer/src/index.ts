@@ -12,6 +12,7 @@ import { VideoState } from './types/VideoState.js';
 import { Stopwatch } from './lib/stopwatch.js';
 import { ObjectURLMap } from './types/ObjectURLMap.js';
 import { pauseVideo, playVideo } from './lib/videoFunctions.js';
+import { runDisplay } from './lib/runDisplay.js';
 
 declare global{
   interface Window{
@@ -57,6 +58,8 @@ window.addEventListener("load", () => {
     .addEventListener("click",playVideo)
   document.getElementById("display-pause")
     .addEventListener("click",pauseVideo)
+  document.getElementById("play-server")
+    .addEventListener("click",runDisplay)
   console.log("loaded")
   
 })

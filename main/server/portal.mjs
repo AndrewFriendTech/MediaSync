@@ -1,6 +1,6 @@
 import express from "express";
 import morgan from "morgan";
-import {existsSync,readFile,readdirSync} from 'fs';
+import {existsSync,readFile,readdirSync, fstat, writeFileSync} from 'fs';
 import { writeFile } from "fs/promises";
 import {createServer} from 'http';
 
@@ -10,6 +10,7 @@ import { Timer} from 'timer-node';
 import { attachStaticRouter } from "./lib/staticRouter.js";
 import { getUniqueFileName } from "./lib/checkInFiles.js"
 import { escapeSlashes } from "./lib/escapeSlashes.js";
+import { spawn } from "child_process";
 const videoTimer = new Timer()
 
 
@@ -66,6 +67,33 @@ app.put("/video/:videoName",express.raw({limit:"2gb",type:"video/mp4"}),async(re
 })
 app.get("/video",(req,res)=>{
     res.send(videos.map(video=>video.toWeb()))
+})
+
+app.post("/runDisplay",express.text(),async (req,res)=>{
+    console.log(req.body)
+     writeFileSync("init.json",req.body)
+     //TO:DO work out way to find a free port
+     const childPort = "8001";
+     const child = spawn("node",["runScreens.mjs"],{env:{PORT:childPort}})
+     child.on("spawn",()=>{
+         //TO:DO redirect for clients not accessing as localhost
+         setTimeout(()=>res.send(`http://localhost:${childPort}`),1000)
+         
+     })
+     
+     child.stdout.on("data",(data)=>{
+         console.log("spawned stdout: "+data)
+     })
+
+     child.stderr.on("data",(data)=>{
+        console.log("spawned stderr: "+data)
+    })
+
+     child.on("error",(code,signal)=>{
+         res.status(500).send({error:"problem spawning screen server",
+         code,signal});
+     })
+
 })
 
 httpServer.listen(port,()=>

@@ -25,7 +25,7 @@ function generateScreens(init){
                 if(!videos[content.src]){
                     
                     try {
-                        video = new Video(content.src,init.videoDirectory)    
+                        video = new Video(content.src,process.cwd() + init.videoDirectory)    
                     } catch (error) {
                         if(error instanceof VideoNotFoundError){
                             console.error(`screen ${screenIndex}, section ${contentIndex}|`,
