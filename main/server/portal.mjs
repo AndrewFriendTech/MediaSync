@@ -105,7 +105,11 @@ app.get("/init/:filename",(req,res)=>{
             {env:{PORT:childPort}})
         child.on("spawn",()=>{
             //TO:DO redirect for clients not accessing as localhost
-            setTimeout(()=>res.send(`http://localhost:${childPort}`),1000)
+            setTimeout(()=>{
+                const url = `http://localhost:${childPort}`
+                if(req.query.redirect === "true") res.redirect(url)
+                else res.send(url)
+            },1000)
             
         })
         
