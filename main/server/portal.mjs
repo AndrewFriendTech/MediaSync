@@ -5,12 +5,13 @@ import { writeFile } from "fs/promises";
 import {createServer} from 'http';
 
 import { Video } from "./classes/Video.js";
-import { cwd, stdout } from "process";
+import { cwd, exit, stdout } from "process";
 import { Timer} from 'timer-node';
 import { attachStaticRouter } from "./lib/staticRouter.js";
 import { getUniqueFileName } from "./lib/checkInFiles.js"
 import { escapeSlashes } from "./lib/escapeSlashes.js";
 import { spawn } from "child_process";
+import * as portcheck from "portcheck";
 const videoTimer = new Timer()
 
 
@@ -100,33 +101,45 @@ app.get("/init/:filename",(req,res)=>{
     const escapedName = escapeSlashes(req.params.filename);
     if(existsSync("init/" + escapedName)){
         const childPort = "8001";
-        const child = spawn("node",
-            ["runScreens.mjs",req.params.filename],
-            {env:{PORT:childPort}})
-        child.on("spawn",()=>{
-            //TO:DO redirect for clients not accessing as localhost
-            setTimeout(()=>{
-                const url = `http://localhost:${childPort}`
-                if(req.query.redirect === "true") res.redirect(url)
-                else res.send(url)
-            },1000)
-            
-        })
+        spawnChild(req,res,childPort)
         
-        child.stdout.on("data",(data)=>{
-            console.log("spawned stdout: "+data)
-        })
-
-        child.stderr.on("data",(data)=>{
-            console.log("spawned stderr: "+data)
-        })
-
-        child.on("error",(code,signal)=>{
-            res.status(500).send({error:"problem spawning screen server",
-            code,signal});
-        })
     } else res.status(400).send({"error":"file not found"})
 })
+
+function spawnChild(req,res,childPort){
+    //TO:DO close all childs upon exit
+    const child = spawn("node",
+            ["runScreens.mjs",req.params.filename],
+            {env:{PORT:childPort}})
+    
+    child.stdout.on("data",(data)=>{
+        console.log(`spawned stdout:(${data})`)
+        if(data.includes("Server started")){
+            //TO:DO redirect for clients not accessing as localhost
+            const url = `http://localhost:${childPort}`
+            if(req.query.redirect === "true") res.redirect(url)
+            else res.send(url)
+            
+        }
+    })
+
+    child.stderr.on("data",(data)=>{
+        console.log(`spawned stderr:(${data})`)
+        if(data.includes("Error: listen EADDRINUSE: address already in use")){
+            if(childPort < 65,535 ){
+                spawnChild(req,res,++childPort)
+            } else{
+                throw "max ports exceeded"
+            }
+        }
+    })
+
+    child.on("error",(code,signal)=>{
+        console.error("spawning error")
+        res.status(500).send({error:"problem spawning screen server",
+        code,signal});
+    })
+}
 
 const initDir = cwd()+"/init/";
 app.post("/init/:filename",express.json(),(req,res)=>{
