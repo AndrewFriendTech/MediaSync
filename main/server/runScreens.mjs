@@ -9,8 +9,9 @@ import {internalIpV4Sync} from 'internal-ip';
 import { generateScreens } from "./lib/generateScreens.js";
 import { SocketAlreadyAttachedError } from "./classes/Screen.js";
 import { Video } from "./classes/Video.js";
-import { stdout } from "process";
+import { argv, stdout } from "process";
 import { Timer} from 'timer-node';
+import { escapeSlashes } from "./lib/escapeSlashes.js";
 
 const videoTimer = new Timer()
 
@@ -27,7 +28,9 @@ const io = new IOServer(httpServer)
 
 
 const port = process.env.PORT || 80;
-const init = JSON.parse(readFileSync("init.json",
+console.log(argv)
+const init_path = argv[2]? `init/${escapeSlashes(argv[2])}` : undefined
+const init = JSON.parse(readFileSync(init_path,
                     {encoding:"utf-8"}));
 
 const screens = generateScreens(init);
