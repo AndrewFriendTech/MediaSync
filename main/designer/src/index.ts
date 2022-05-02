@@ -12,7 +12,8 @@ import { VideoState } from './types/VideoState.js';
 import { Stopwatch } from './lib/stopwatch.js';
 import { ObjectURLMap } from './types/ObjectURLMap.js';
 import { pauseVideo, playVideo } from './lib/videoFunctions.js';
-import { runDisplay } from './lib/runDisplay.js';
+import { saveDisplay } from './components/file-controls/saveDisplay.js';
+import { runDisplay } from './components/file-controls/runDisplay.js';
 
 declare global{
   interface Window{
@@ -23,7 +24,8 @@ declare global{
       exampleSection:Section
       videoState:VideoState
       displayTime:Stopwatch
-      objectURLMap:ObjectURLMap
+      objectURLMap:ObjectURLMap,
+      filename:string
   }
 }
 
@@ -58,6 +60,8 @@ window.addEventListener("load", () => {
     .addEventListener("click",playVideo)
   document.getElementById("display-pause")
     .addEventListener("click",pauseVideo)
+  document.getElementById("save")
+    .addEventListener("click",()=>saveDisplay())
   document.getElementById("play-server")
     .addEventListener("click",runDisplay)
   console.log("loaded")
