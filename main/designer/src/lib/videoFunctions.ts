@@ -5,7 +5,7 @@ import { Section } from "../types/Section.js";
 import { Video } from "../types/Video.js";
 import { VideoState } from "../types/VideoState.js";
 
-let timeInterval: number | NodeJS.Timer;
+let timeInterval: number;
 let time  = 0;
 let screenBounds:Bound[];
 let screenCurrentSection:number = 0;
