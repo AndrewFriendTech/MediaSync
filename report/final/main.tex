@@ -1,0 +1,395 @@
+\documentclass{article}
+\usepackage{graphicx}
+\graphicspath{{./images}}
+\usepackage[utf8]{inputenc}
+\usepackage[
+backend=biber,
+style=numeric,
+sorting=none
+]{biblatex}
+\addbibresource{main.bib}
+\usepackage{tabularx}
+
+    
+\urlstyle{same}
+\title{MediaSync - Final Report}
+\author{Andrew Friend}
+\date{6 May 2022}
+
+\begin{document}
+
+
+
+% Defined constants
+\newcommand{\screenshotwidth}[0]{40em}
+
+\maketitle
+https://github.com/AndrewFriendTech/MediaSync
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Abstract}
+I have created a software application called MediaSync. MediaSync is a display management/digital signage system, controlling audiovisual displays across multiple screens remotely. The software package will also include an interface for planning these audiovisual displays. A server will synchronise the involved displays, that will connect via a HTML/JavaScript based thin client that will download video from the server , pre-download it and then display the video synchronised without any lags in the display. 
+
+The main Unique Selling Point of my project is that it will be in the form of a web application , whereas many equivalent software are not. My software aims to be runnable on a very wide range of devices. (Any that can support HTML5 ,ES6, and the MP4 codec). My software will also be especially suited for applications where synchronicity is key, as my project is aiming to have no noticable latency between screens.
+
+
+\section{Keywords}
+\begin{itemize}
+\item Audiovisual
+\item Display
+\item Management
+\item Remote
+\item Web
+\end{itemize}
+
+
+\section{Introduction}
+
+I am creating a digital signage software package. Their are many other software packages in this sector. I am going to detail these in the following subsection and then detail the niche that my one will try to fulfil
+.
+
+\subsection{What my project is seeking to achieve}
+My project is aiming to be a web application based Digital signage software. It is aiming to be lightweight and cross platform, compared the big and often platform limited current digital signage/display management software packages. It will aim to only have the most useful features needed for a digital signage system. It will keep its scope narrow, it will not include features that are better suited for a video editor. By keeping the scope narrow I hope to reduce the amount of storage space used, make the application speedier and reduce the burden and difficulty of maintenance, with greater time focused on perfecting the digital signage part of the software package. The target audience of the project is primarily visual artists, but the project can also be useful to other people who need remote controlled displays like businesses that have displays for advertising  or informational purposes.
+
+\subsection{Survey of the Field}
+Many other systems exist for screen management/digital signage. Most of these are paid or freeware paid systems, but a few open source one exists. In this section I am going list some of these systems and discuss the pros and cons.
+
+To get an idea of the popular software packages in this domain , I will use the article from the TechRadar industry magazine \cite{allen2021} to find me what is popular.
+\subsubsection{NoviSign}
+NoviSign is described as "Major player with professional signage solutions". NoviSign has a cloud based administration tool, however, its client software requires you to install an application, which is only installable on Windows, Android, and Chrome based systems.  \cite{novisign}. This means that all other systems are excluded from being able to act as client, while my software will be able to run on any system that works on a modern web browser.
+
+
+\subsubsection{ Yodeck}
+Yodeck is another commercial screen management software package. TechRadar describes its positives as being: "Single-monitor account is free","Very scalable" and as having a "Good range of features". However , its key disadvantage is that its client can only be installed on a single device you have to purchase\cite{allen2021}, while my software will be able to run on any modern web compatible device, with the number only limited by computational power of the server.
+
+\subsubsection{Xibo}
+Xibo is one of the few open source digital signage solutions in the field. Xibo has a user interface very similar to the one I had planned out before.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\screenshotwidth]{xibo_UX.png}
+    \caption{User Interface for the Xibu designer}
+    \label{fig:my_label}
+\end{figure}
+However, one flaw of it is that is a desktop application, limited to a number of desktop platforms. While mine will be hosted on a central server(than can run on any NodeJS supporting platform), and with a web based client that will be able to work on any web supported device.
+
+
+
+
+\section{Background}
+Their is a number of  academic papers written about digital signage and display management software. For the research for my project I have reviewed two papers is particular, which have given me valuable insights on how and why to design my project.
+
+\subsubsection{Experience of Tokyo University of Agriculture and Technology in Creating a Digital Signage System}
+The first paper I read was \textit{Low-cost managed digital signage system with signage device using small-sized and low-cost information device} by Kazuhiro Mishima, TakeshI Sakurada, and YoichI Hagiwara of Tokyo University of Agriculture and Technology.\cite{tokyo}  The paper tells their experience of  implementing a new Digital Signage system for their university campus system. It shows some of the current pitfalls and problems in the current situation with Digital signage systems. They say before the installation of the new system by them, the university were "operating various digital signage systems..." for the purpose of "...visualizing the power consumption"\cite{tokyo}.  The procedure for setting up the system was described as the following
+\begin{quote}
+"Procedure 1
+
+set up the digital signage display device. It can burn the customized OS image into SD card, and insert the SD card into a Raspberry Pi.
+
+Procedure 2
+
+Register the display device using our management system's Web User Interface. Once register the device, in management system, automatically create the authentication information for SSH; and administrator can retrieve the SSH public key from Web User Interface. Its key is required to save into appropriate folder in the SD card which created in Proc.1.
+
+Procedure 3
+
+Boot the Raspberry PI using the SD card. (Network will connect using by DH CP.)
+
+Procedure 4
+
+Register the content. By using content management interface, content information and content data itself can be registered into the management system.
+
+Procedure 5
+
+Register the content set. Content set is a combination of multiple contents. By defining content set, it becomes possible to sequentially display multiple contents in a device.
+
+Procedure 6
+
+Register the content assignment information. In this procedure, a particular content set and a device will be associated.
+
+Procedure 7
+
+Kick the deployment (Actually, push the “Kick-off” button). After this action, content data transfer and configuration of the device will execute."
+\end{quote}
+
+In their implementation of the system, I feel the main weakness of the system is the amount of manual setting up they have to do on the side of screen devices. In my system I aiming to prevent all this by running both client and server as web applications. The only amount of configuration needed will be entering the URL for the screen. After that, no input in the clients will be needed.
+
+\subsubsection{Interactive Digital Signage - An Innovative Service and Its Future Strategies}
+Another paper I looked at was \textit{Interactive Digital Signage - An Innovative Service and Its Future Strategies} by Christine Bauer, Paul Dohmen, Christine Strauss of University of Vienna \cite{future}. This paper had given me insights about the market for my software package.
+
+Through a reference to another paper by John V. Harrison, it highlighted how Digital Signage is an in demand product because it "offers both significant reductions in cost, and also major improvements in effectiveness, over traditional signage". Harrison highlights how "The creation, distribution and installation (CDI) of conventional signage material is expensive in terms of labor and material. The cost of the graphic artist is a very small component of the total costs. The majority of the costs result from the production of plastic film and other material that the artwork is rendered on." \cite{HARRISON2004163} but my digital signage product will eliminate that cost as will you will no longer need to buy and replace any physical signage materials. 
+
+This section also made me adjust part of my design for my MediaSync application. I realised I had not eliminated this cost entirely, as if you want to change the display being shown, you would have to link each client back up with the server manually. I will now make my application so that all screens will be registered as a device to the central server, and be able to changed mid display. 
+
+The original paper by Christene Bauer et al. also highlights some of the situations that my Digital signage system might be used in. These include "point of sale" and "point of wait", which fall under my aimed for area of static video displays. The third described area is "point of transit (POT)". This means that the display contains information that updates live and automatically. My project will not contain that initially, as I'm primarily aiming to base it upon videos, and want to keep the scope narrow.
+
+
+
+\section{Methods}
+My software is in the form of 4 parts. A Web interface for planning the timings and screen choices in a display. A server for broadcasting the videos to the client devices and communicating timings and actions. A console for controlling the screens and registering new devices, and a simple HTML client for displaying the video on client devices. The last 3 parts have already been provisionally produced  in the prototype stage, and the 1st is currently being designed.
+
+\subsection{Technical Outline}
+The project will have a core server application. This server application will be able to have commands sent to it in a user friendly manor by a web application based console. This console and the server will communicate with each other in real time via web-sockets API. The console will outline the current state of the display, show the connected screens, assign the connected screens to numbers in the display, and controls for the user to load,stop and start displays. Through the console, you can go to a display designer application. This application will allow you plan the display and upload the videos to the server. Each display will be stored a JSON file in the server, and will be able to be loaded from the console. When the client is loaded, it connects to server and will show up on the console, on the console the client device can be assigned a screen. Once a display is loaded and the screen selected, the videos are downloaded prior to the execution of the video. Since chrome can only hold about 1GB of memory per tab , the videos in a display will need to be initially limited to 1GB, but an algorithm to load the videos in blocks will be aimed to implemented later.
+
+\subsection{Technical Choices}
+My entire software package is in the form of a web application. I chose the application to be implemented using web technologies. The main reason is that it's cross platform nature. A key feature of my product is it's ability is to be run on multiple platforms, such as Windows PCs,Linux PCs and Android and iOS smartphones. This need for this is especially highlighted by the common usage of the "Raspberry Pi" device for digital signage , such as the previously discussed Tokyo project \cite{tokyo} and numerous other projects\cite{bandung2015design}\cite{arsan2014design}\cite{mishima2016cost}\cite{alase2017iot}. A Raspberry PI is a low cost portable computer. The Raspberry PI does not support normal desktop version of Windows, and the older ARMv6 Pis do not support Windows at all. This prevents the installation of many common Software products, including digital signage, however Chromium (an open source version of Google Chrome) is available on all Raspberry Pis and other similar low cost devices.  
+
+The core server for my application is the Node.js JavaScript run time. One reason I chose the platform was that I have much experience using the platform from previous projects, and have found it a useful for building web applications. Another reason is its cross platform nature, as it supports all the common server and desktop OS (Windows, MacOS, Linux, FreeBSD) and both the x86 and ARM architecture, meaning the server can also be run on Raspberry Pis. Using Node.js also allows me to use the same language for both the client side and server side. It is important that the application is cross platform as this means it can be run on as many devices as possible and one of the aims of the project is to be low on associated costs and low cost devices such as Raspberry Pis can not run Windows, and older laptops can frequently not run the newer versions of windows and therefore are often suited to the installation of Linux.
+
+An alternative the web application + pre loading video is to stream or synchronise video using a software package such as VLC or Mplayer, however , in an earlier visual arts installation I assited in setting up \cite{friend_2021}, Mplayer was used and the Raspberry Pis struggled to process the video and their was frequent stuttering. 
+
+\subsubsection{Language}
+For the language, I am going to use the language Typescript, which is converted to JavaScript for execution purposes. I have chosen this language due to my prior experiences with prior large web projects. TypeScript is a superset of JavaScript with optional static typing \cite{typescript}. 
+
+Boris Cherny in his book \textit{Programming TypeScript} outlines many of the advantages of TypeScript. He starts out by  outlining many common typing related bugs in which would only be found at compile time, and then explains that these will be found by the TypeScript compiler. He makes the claim that using TypeScript over JavaScript will ``eliminate entire classes of type-related bugs" and additionally states that it "will actually change the way you write code. You will find yourself sketching out a program at the type level before you fill it in at the value level"\cite{cherny_2019}. 
+
+I predicted this will be especially useful for this project, as previous large web application projects , I have had many hard to debug issues, often related to type. Additionally, in the past I have additionally found myself writing spaghettI code", code that is hard for me and others to read and understand back. Cherny states TypeScript serves as "documentation for yourself and future engineers", which will help me mitigate the problem.
+
+\subsection{Technical Structure}
+\subsubsection{File Structure}
+The project has 2 main top level folders, prototype, which has the code for my prototype, and main which has the code for the Final work. The files in main consist of the server, which coordinates the screens and stores displays and videos for use in displays and the designer, and the designer web application, which allows the user to plan out the displays. 
+ 
+ \begin{figure}[h]
+    \centering
+    \includegraphics[width=15em]{images/server file structure.png}
+    \caption{Server file structure}
+    \label{fig:my_label}
+\end{figure}
+
+\underline{\textbf{Server}}\newline
+\textbf{.vscode} -  Folder containing configuration files for the IDE used to develop.\newline
+\textbf{classes} - Folder containing classes representing data objects such as Screen, Video and Sections.\newline
+\textbf{init} - Folder where the JSON files planning displays are placed.\newline
+\textbf{lib} - Folder of Helper Functions. \newline
+\textbf{node\_modules} - External libraries used in the project, most notably express.\newline
+\textbf{video} - Folder where videos uploaded for use in displays are stored. \newline
+\textbf{views} - Folder of EJS(Embedded JavaScript) templates for sever-side rendering certain pages of the application. \newline
+\textbf{package-lock\.json} - Specifies what version of external libraries to install \newline
+\textbf{package.json} - details about the package. \newline
+\textbf{portal.html} - Portal to direct the user to parts of the application , including the designer and a list of displays the user has already created, with links to run the necessary \newline
+\textbf{portal.mjs} - Node.js server which handles the server-side logic necessary for the portal and for the designer and the script run to launch the application. Can spawn instances runScreens.mjs in response to either request from the designer or a request from the portal. \newline
+\textbf{runScreens.mjs} - Node.js server which launches a display and coordinates the actions between servers. This part of the application runs as a separate process than the designer and the server. Multiple displays can be run on the same computer, using different port numbers for each display. \newline
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=13em]{images/designer file structure.png} 
+    \caption{Designer file structure}
+    \label{fig:my_label}
+\end{figure}
+
+
+\underline{\textbf{Designer}} \newline
+\textbf{build} - Compiled JavaScript files \newline
+\textbf{node\_modules} - External libraries used in the project. \newline
+\textbf{src} - TypeScript files, subdivided into \textbf{components} for code related to a single component , \textbf{types} for files that define types and \textbf{lib} for more general function, and \textbf{index.ts}, the entry point for the application , where all the events are registered to items on the HTML page and other setup related code.
+ 
+
+\subsubsection{Templating system}
+For the designer, rather than use a pre-existing templating system for my project(such as a client-side framework like React,or server side like EJS,Mustache or PHP), or , I created my own light weight  client side ad-hoc system for the project. For the designer , the core index.html defines the primary structure of the page. \cite{designer_index.html}. In this index.html, in addition to the main structure of the page, it contained templates which defined the structure of elements for repeated content, such as video information or display sections.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=30em]{images/template element.png}
+    \caption{Example template element.}
+    \label{fig:my_label}
+\end{figure}
+As shown by figure 4, the template element is signified as such by having ``template" in the class list. If an item contains this class, it is hidden by the style sheet. All the functions related to the element are stored in folders named according to the class name of the element, as shown in figure 5.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=15em]{images/template file structure.png}
+    \caption{template file structure}
+    \label{fig:my_label}
+\end{figure}
+The Element can be cloned using the function in getTemplate.ts. This element is then filled with the relevant text and has events added to it to allow mutation of state. The advantage of this approach is that their is no overhead for the user in downloading often large external libraries like Angular or React, nor the overhead on me the developer of having to learn a new JavaScript framework and forcing my project to conform the paradigm that the framework enforces. However this approach does not benefit from the automatic state updates frameworks such as react provides, and needs the page to manually be updated whenever a change in state is required.
+
+
+\subsection{Project Structure}
+I have split my project into 3 phases. These phases are Prototype, Design, Implement and Test. I am currently in the Design phase. For all my phases , I am using a Trello board to organise the tasks that I have to do. This is what it currently looks like: 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\screenshotwidth]{trello.png}
+    \caption{State of my trello board when interim report was submitted.}
+    \label{fig:my_label}
+\end{figure}
+
+I find this is useful for reminding which part of the project I am supposed to be immediately working on. The Trello application additionally gives me an activity log which can be read back to tell me how long I spent on a task for later reference, and will later allow me to evaluate my performance of getting tasks done.
+
+\subsubsection{Prototype}
+My first phase of the project was to build a prototype Digital signage system. Originally , I had wanted to make a formal design for the project alongside my prototype, but I found it hard to envision what the program should look like without making a basic attempt at the idea first.  I found making a prototype before the design very useful as it allowed me to learn lessons about how the project should be implemented. I will write about the lessons that I have learnt in the the results so far section. Much of the code from the prototype will be used in the final product, but with typescript type annotations included, and better JSDoc documentation
+\subsubsection{Design}
+I am designing the project in a number of ways. I am producing the basic documentation for the project before I write the code for the final version of the project. I am doing to this to give me a structured way of coding and building up the project, rather than building up the project in an ad-hoc way. I hope this method of working will allow me to avoid the pitfalls I have had with other web application project, which was when the project got more complex the structure became more disjointed. Designing the structure before I write the code will helpfully hope to prevent this. 
+
+As part of the user interface design on the application, I have created wireframes on Adobe XD, for each interface I am creating multiple wireframes and creating surveys that I am sending out to multiple potential users to gather which one would be their favoured interface and allowing comments on features to add.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\screenshotwidth]{images/proto2.png}
+    \caption{Example display maker prototype}
+    \label{fig:my_label}
+\end{figure}
+\subsubsection{Implement and Test}
+For my final stage I am going to implement, and while in the processes of the implementation, I will constantly test the current components each time they are made. I will break the construction into smaller manageable parts, I will not write pre-made unit tests, as I have found in previous experience that technical requirements change often during development. I will instead manually test each component of the software after writing. I find this is much more time efficient than unit testing but still gets the job of testing done.  
+
+The tool I will use to test the software's communication between client and server will be Postman. Postman is described by it's creators as "A comprehensive set of tools that help accelerate the API Lifecycle - from design, testing, documentation, and mocking to discovery."\cite{postman} Postman contains tools that will allow me to test the REST API and Websocket parts of my application.
+
+Once the minimum viable product is made, I will release my project to a wider audience and encourage people to use it in a form of beta testing, and encourage them to provide feedback on my work , making iterative improvements to the work. The increased traffic will also expose the program to real world use, which will hopefully expose bugs for me to fix that I have missed in prior work. Once this processes has carried on , the application can be released as a full product.   
+
+
+
+\section{Results so far}
+\subsection{Prototype}
+I Have successfully created an operational prototype of my work. The prototype executes a pre-planned display file. The prototype provides a console to stop and start and demonstrates the basics of the Websockets API. The prototype taught me what works and what does not work, and highlighted some aspects I had missed while creating the code. One lesson I learned in the prototype was the differing codec support between different browsers. I learned that the Ogg/Theora codec does not work on safari, neither does webm on older versions. In response to this , I will incorporate into my design a feature where all videos uploaded to the server are converted using ffmpeg to H264/mp4 codec, which is supported by the widest range of browsers \cite{mozilla}. This experience also highlighted the importance to me  of testing on multiple browsers, as their is still lots of differences between the different browsers , and what will work on one might not work on others.
+
+Another lesson I learnt is that is frustrating to users when they don't know the progress of a videos download, and it would be helpful to update the users of the progress of videos downloads , so they know how long to expect to wait , and that their wait is not the result of the program crashing. This lesson highlighted to me importance of actually getting user feedback.
+
+The prototype worked well with the preset display. It had shown zero noticeable latency between screens even when in over different networks. 
+\newline\newline\newline
+\textbf{continued on next page ...} 
+
+\pagebreak
+
+\subsection{Design}
+
+I have designed the file format specification for the displays. Additionally, I have created wireframes for the display creator. I chose 2 final ones for the display designer and created a survey to gather user responses about the interfaces. From the 3 people I had surveyed, below is the response:
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=30em]{survey_table.PNG}
+    \caption{Display user survey}
+    \label{fig:Table for the results of the survey }
+\end{figure}
+
+Since prototype  1  has the most votes, I choose that one for the final design to base my UI off of.
+Of the recommendations in the "What features would you like to see added to the app" column, I will add a playlist to the final design also. 
+\subsubsection{Feedback from potential stakeholders}
+Another aspect of the design process was getting evaluation of the prototypes from potential stakeholders. One consultation I had from a visual artist, and she suggested features such as an after effects like interface, which was already partially implemented . She additionally suggested additional features such as live filters \cite{visart}, useful to field of live coding. While I chose not to implement these features for purpose of scope and being able to get a working product by the deadline, the consultation is still fruitful as it has informed me of what to put as the future direction of the project. 
+\subsection{Evaluation}
+
+\subsubsection{Evolution of Technical Methods}
+As the project progressed , my methods in the project had changed. 
+
+The biggest change to my methodology has been abandoning the previous plan of trying pre-document and plan my work. I made this change because I found what to do impossible to envision without actually attempting the problem in code. The one weakness with this approach is that I currently do not have much documentation for my code. However, this disadvantage has been offseted via my use of the programming language typescript , which requires me to self document my work as each function and my component of my work has its outputs and inputs clearly typed and annotated. I think in retrospect, this was the correct decision, as the code has still few bugs compared to previous projects of mine. However, the project took much longer to progress  than I had expected to be completed, and the change of methodology may be the cause.
+
+\subsection{Practical Demonstration} 
+As one of the last actions of my project. I did a practical demonstration of my project, attempting to simulate how the software would be used in a real life visual art installation. I feel this was a very fruitful part of the project. It had confirmed that many of the projects goal's where reached,but it also highlighted many problems in practical usage that I had overlooked at the design stage of the product, and highlighted to me changes I needed to make to ensure that I had a fully working product.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\screenshotwidth]{images/demonstration.jpg}
+    \caption{Practical Demonstration of MediaSync}
+    \label{fig:my_label}
+\end{figure}
+
+Shown in Figure 5, my project consisted of 4 client Lenovo Yoga 2s, and as a server, also a Lenovo Yoga 2. The computers all used the Google Chrome browser and the server using Node.js 18.0.0. The operating system of all the computers was Linux Mint. The computers are connected via a non-internet connected LAN powered by a Virgin Media Home Hub. The display consisted of a video that was cropped into 4 other videos for each quarter of the video, the main purpose to see if there was any visible lag between screens. 
+
+The first stage of the demonstration was installing the software on the server think pad. This was a cumbersome processes, as the version of Node.js in the repository was outdated and not the correct version needed for the application to run correctly. I had to install Node.js from the downloads from the Node.js website, which was a cumbersome process in itself. This made me realise that the installation process of the software was not suitable for people that are not technically minded , and I will need to implement a Shell script and Batch files automating the process for end users.
+
+The next stage of the process was using the designer. This involved creating the display via the designer part of my application, which worked well. I then ran the server to run the display. When I tried to connect the clients to a server, another design flaw was uncovered. The client code used a JavaScript library that was imported from an external CDN, however, since in the demonstration the client was being used on a non internet connected LAN, the client application was broken. This problem was rectified on the spot by me changing the client to import the script from the application server rather from the internet linked CDN(Content Delivery Network). Once this problem was addressed , the application worked.
+
+When running , the demonstration showed that the project worked correctly and achieved one of my main goals of flawless synced displays (Video of display in action available at : https://www.youtube.com/watch?v=Rfmyc0X89lE ). The displays showed no lag between each other, and paused and played instantaneously.
+
+In my opinion , this test was very effective for the project. It allowed me to get an idea of how the software works in a realistic scenario that someone such as visual artist would encounter in a display. However, this exercise still has big limitations. The hardware used was all of the same type (Lenovo Yoga), since one of the goals of my project is to create software that can run on even very cheap devices, future tests should include cheaper devices like the Raspberry Pi, Smartphone or older PCs. Another weakness of my test was that it only shown the operation over a local network, a future test should be conducted with devices over many different networks, such as one device on cellular internet, and one on a home Broadband network. An alternative of this kind of simulated testing is a public beta, but this has the problem of generated enough interested people to test what is yet unfinished product. 
+
+
+
+
+
+\section{Results}
+Firstly in this section I am going to recap the goals I set for the project in the beginning, I am them going to evaluate what I currently have against that criteria and against other metrics.
+In the section \textit{``Abstract"}, I outlined some of the basic goals that my project seeks to achieve, they are quoted below:
+\begin{quote}
+``MediaSync will be a display management/digital signage system, controlling audiovisual displays across multiple screens remotely. The software package will also include an interface for planning these audiovisual displays. A server will synchronise the involved displays, that will connect via a HTML/JavaScript based thin client that will download video from the server , pre-download it and then display the video synchronised without any lags in the display. "
+\end{quote}
+
+Other goals stated in the \textit{``What my project is seeking to achieve"} include ``It is aiming to be lightweight and cross platform,
+
+In addition , the structure of the project was outlined in the subsection \textit{``Technical Outline"} which is inside the section \textit{``Methods"}. The technical outline was describes as follows.
+
+\begin{quote}
+    The project will have a core server application. This server application will be able to have commands sent to it in a user friendly manor by a HTML based console. This console and the server will communicate with each other in real time via web-sockets api. The console will outline the current state of the display, show the connected screens, assign the connected screens to numbers in the display, and controls for the user to load,stop and start displays. Through the console, you can go to a display designer application. This application will allow you plan the display and upload the videos to the server. Each display will be stored a JSON file in the server, and will be able to be loaded from the console. When the client is loaded, it connects to server and will show up on the console, on the console the client device can be assigned a screen. Once a display is loaded and the screen selected, the videos are downloaded prior to the execution of the video. 
+\end{quote}
+
+Of the goals from the abstract, all the basic goals have been achieved, my product as it stands functions as a working, albeit limited digital signage system. Bomee Lafitte defines digital signage software as composing of four basic functions:
+
+\begin{itemize}
+    \item Content Creation
+    \item Content Management and Distribution
+    \item Device/Player Management
+    \item Performance Measurement
+\end{itemize}
+\cite{lafitte_2022}
+
+The first point, ``Content Creation" is covered by the design section of the application. \cite{design_github}. The design application currently allows you to plan out video displays using an intuitive yet somewhat primitive user interface based on popular video editing applications such as After Effects and Windows Movie Maker. The main weakness of the application in this regard is the rather unrefined aesthetics and the lack of support for non-video formats such as slideshows and static images. The way the designer saved the display has changed during the development of the project. Originally I had planned to save the displays, and their associated videos all in a single file using the BSON technology. However, due to my inability to get the format decoded in the browser, I abandoned the idea and instead stored all the relevant data server side, the videos had a directory on the server, and so did the displays. 
+
+
+The Second point of ``Content Management and Distribution" is covered by the main server of the application. The designer software allows you to upload videos to the server, provides a list of videos that are uploaded to the server and allows them to be included in the display. However, improvements can be made, details could be provided about the video , such as duration and running time.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\screenshotwidth]{images/designer.png}
+    \caption{MediaSync Designer User Interface}
+    \label{fig:my_label}
+\end{figure}
+
+Device and Player Management has been successfully provided by the server. A console is provided that generates the links needed for the clients to connect to the server using their web browser, tracks the state of each client, and provides the controls to pause and play the display. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\screenshotwidth]{images/console.png}
+    \caption{MediaSync Console User Interface}
+    \label{fig:my_label}
+\end{figure}
+
+The only part of the quoted functions that my system lacks is Performance Measurement. The system lacks any way to gauge user interaction and effectiveness of content displayed through the system. This could be gauged either through a camera which tracks users and their facial responses around the display, or via introducing interactive elements to the displays.
+
+Most elements of the application are fully functional and work without any bugs. The user interface is simple but in my opinion and of people who have seen the project it is easy and self explanatory what each part does.
+\section{Discussion}
+I feel the project has been largely successful, this is because I have achieved all the initial goals that I set out to do. However, in the execution of the project, I feel their is still some areas that I could have improved in. The project to get to the level it is at currently took much longer to reach milestones than my initial estimates in the interim report had planned. I think this is because two factors. 
+
+The main reason was because certain features of the code took much longer than I had expected to complete, this was especially in the making of the designer, where I faced lots of errors that I found hard to debug. I feel this is mainly down to my unorganised approach to the architecture, and an indictment of the ad-hoc templating system that I used. It shown that using TypeScript alone is not enough to prevent the bulk of unforeseen errors. It is often said by many web developers that using a framework increases maintainability and ease of development \cite{shadow_dom}, but I can find no empirical research supporting using a framework over vanilla(no external frameworks) JavaScript or visa versa. A study attempting to determine the many available frameworks, and vanilla JavaScript would be useful for programmers and project managers to make decisions on how to implement their projects.
+
+In response to the breakdown of earlier set deadlines, I found once reaching these stumbling blocks I found the amount of time spent on other important parts of the project to have fell below what I would have wanted myself to do, mainly due to conflicts with other university related responsibilities of mine. This had highlighted the importance of planning for potential failures or setbacks, and making decision on when to make trade-offs and focus on different parts of the projects instead.
+
+I feel my project has made a significant contribution to the field of digital signage. It shows a working example that is cross platform, lightweight and that is not tied down to any particular pieces of hardware. As shown in my survey of the field section of this report, most of the other competitors use native applications to run their digital signage system.  My system shows to other people interested in digital signage that it is possible to have lossless, synchronised and lag-free visual displays running using only a lightweight Node.js server. This was done via preloading the videos to the memory of the clients first, and then using the lightweight messages over the  web sockets protocol ( which displayed no noticeable latency even when clients were spread across multiple networks),  this blueprint can be built over by other people who are interested in digital signage and similar problems that involve synchronising audiovisual content into creating more advanced systems or systems that use different kinds of content, such as slideshows or interactive displays. 
+
+The digital signage system developed by Swapnil Alase and VaibhavI Chinchur \cite{alase2017iot} used Node.js and web technologies like my project had used, but their project involved the creation of custom web pages and their associated JavaScript code for each screen their were showing, while mine provided a more general purpose system that did not require any knowledge of how to program for the users of the system. However, one advantage that Alase and Chinchur's system had over mine was that their system was able to update the image being shown over the internet while the display was in progress.  
+
+\section{Limitations and Future Works}
+My project , all though successful at showing my initial goals are possible, still has a number of limitations.
+
+
+
+\subsection{Browser Compatibility}
+Carrying on in the vein of compatibility, another limitation I had experienced was with supporting older web standards. The JavaScript being written to currently written to the ES6 standard, published in 2015 \cite{ecmascript}. While 96\% of consumer browsers can use es6 \cite{es6_support}, I feel it important to include support for older JavaScript engine, as part of my project goals is to have support for low cost devices, and many of these don't support more modern browsers. Originally I planned to use the Babel transpiler (a compiler that converts between languages) to convert down my JavaScript files to an older version, and Webpack to combine the files, however errors occurred that I was unable to debug while trying to transpile the code down to an older version of JavaScript ,so I switched to using ES6 directly so I could spend more time on the more major parts of the project more important to the functionality of the application and ensure that my project is completed by the deadline.
+
+\subsection{Additional Media Formats}
+Another feature that should be added to MediaSync in the future is the ability to include different media formats other than video files. Other formats that will be useful include slideshows, static images and HTML pages. This improvement will be especially relevant for commercial users of the package, as much of the information that they will want to remotely display will not be in the form of videos but more towards static images and slideshows.
+
+In terms of the format used to store the display plan, extending it to support other formats is simple and only involves small tweaks to the schema. However the bigger technical challenge comes from code to display and distribute these new formats. In my opinion the best way to implement additional formats is via a plugin format. Compartmentalisation will be very important , as the code-base will grow harder to maintain if more sections of code are haphazardly added to the software. Instead, a generic architecture should be devised for new formats, with a common API for the players of each new format , and encapsulation  so no parts of the existing code base will have to be modified (and potentially break other parts of the application) in order to add new formats to the application. 
+
+\subsection{Minor Improvements}
+To become a commonly used product for new developers, the project not only needs to fulfil the basic task , but also have the small features that improve the User Experience and better inform the end user on what is happening. One small limitation in the designer is that at the moment, when uploading videos to server, or downloading them for previews, their is no progress bar. Videos can take a long time to download over the internet, and without visual evidence that the download is progressing, and without an estimation of when the download will finish, the user could end up thinking the application is not working and the download has failed. A progress bar will also be useful in the console so the display controller can see the progress of the client computers on downloading the videos.
+
+Another minor improvement that can be made the application is the adding details about the videos to the section of the designer where videos that can be added to the display are listed. This feature will be very useful for the planners of displays, as they may have a set time limit to their display, and want to know what videos they can and cannot add.
+
+These are only two of many possible minor features that could be added to the application. While they only seem minor on their own , together they will help improve the perception and utility of MediaSync, and help it better compete with other digital signage solutions. To get the best idea of what potential users want, I need a greater amount of users, or will need to showcase the software to potential users, and to encourage them to submit feature requests, so I can get a better knowledge on what features are wanted for digital signage system. However , when adding new features, trade-offs related to scope have to be kept in mind , and diligence will have to be taken to ensure that the code base doesn't grow too large to be unmaintainable , or the weight of all the extra features does not slowdown and reduce the performance the application as a whole. 
+
+\subsection{Live Coding}
+One direction I want to take this project is to the promising field of ``live coding". Live Coding is described as "the process of writing computer code, in real time, to compose and play music or design animations."  \cite{palmer_2009}. One of the popular platforms to perform live coding is p5.js, a JavaScript library that provides simple tools to create animations over a canvas, and additionally you can include video streams into these animations. 
+
+Their are two ways to could go about this, the first way would to be build on top of the p5.js and provide a live console as part of the application, where the controller of the display can enter commands in p5.js to draw on and modify the currently playing video. These commands would be sent over the internet The strength of this approach is that it will be very useful to existing live coding community who use the p5.js library. It will additionally require less technical effort to combine a pre-existing library with the application. 
+
+The other way is to depart from the traditional "coding" part of live coding and instead provide a tool-set of filters and effects similar to a video editing application such as After Effects. This approach, while more friendly to artists without a background in programming, offers a number of disadvantages. They include an increased workload for development , as all the tools will have to be implemented from scratch, the GUI component of a toolbox, and the code to select which tool you want to use, will also have to be implemented.
+
+Both the approaches stated will share a number of challenges. One of these is performance. Video processing tends to be a computationally intensive operation. This means that the application will probably no longer work on lower end devices as well as MediaSync works at the moment. It will additionally make the processes of synchronising the displays more complex, as the latency will be more noticeable. Techniques will need to be developed in order measure that latency and perhaps pause some of the displays, or wait on executing commands, to ensure no asynchrony occurs. 
+ 
+\section{Conclusion}
+In this project I have shown it is possible to have lightweight, cross platform, web based system to display audio visual content over many screens and over separate networks. The application involves minimal setup , especially for the client. Their is no lag between screens, making MediaSync suitable for to run video walls, a common tool for visual artists to showcase their work, and allows them do so on basic hardware such as a raspberry pI or a bunch of old laptops, helping them to save them money, but also helping them to save the environment by giving a new life to old computers that are sitting in your house, gathering up dust. In your audiovisual displays, rather than having untangle your box of cables and having to connect a bunch of monitors up to your powerful computer, you can simply use any device capable of browsing the modern internet and receive the video over the internet or a local network. 
+
+While the project is lacking in some areas, and the user interface needs to be brought up to professionality it deserves, it shows what can be achieved and how it can be done so with only web technologies, and will be able to serve as an important platform and blueprint to be built upon and expanded upon to show an even wider range of media formats across multiple screens, such as images,slideshows or web-pages, or expanded into the creative domain of live coding , spicing up a pre created audiovisual display with live filters , animations and distortion.
+ 
+
+\printbibliography[
+heading=bibintoc,
+title={Bibliography}
+]
+
+\end{document}
